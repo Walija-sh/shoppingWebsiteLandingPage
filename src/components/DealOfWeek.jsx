@@ -9,54 +9,53 @@ import "swiper/css/navigation";
 
 const dealProducts = [
   {
-    image: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
+    image: "/assets/product/prodImg1.jpg",
     title: "Burgundy Wool Double-Breasted Coat",
     price: 289,
     originalPrice: 420,
     isOnSale: true,
     rating: 5,
+    categories: ["bestseller", "sale", "trending"],
   },
+
   {
-    image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446",
+    image: "/assets/product/prodImg3.jpg",
     title: "Elegant Black Wrap Midi Dress",
     price: 199,
     originalPrice: 279,
     isOnSale: true,
     rating: 5,
+    categories: ["sale", "bestseller"],
+  },
+
+  {
+    image: "/assets/product/prodImg5.jpg",
+    title: "Olive Green Premium Hoodie",
+    price: 89,
+     originalPrice: 99,
+    isOnSale: true,
+    rating: 4,
+    categories: ["new"],
   },
   {
-    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
+    image: "/assets/product/prodImg6.jpg",
     title: "Camel Belted Trench Coat",
-    price: 249,
-    originalPrice: 349,
+    price: 349,
+     originalPrice: 411,
     isOnSale: true,
     rating: 5,
+    categories: ["bestseller", "trending"],
   },
   {
-    image: "https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0",
+    image: "/assets/product/prodImg7.jpg",
     title: "Navy Double-Breasted Blazer",
-    price: 179,
-    originalPrice: 259,
-    isOnSale: true,
-    rating: 4,
-  },
-   {
-    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
-    title: "Camel Belted Trench Coat",
-     price: 179,
-    originalPrice: 259,
-    isOnSale: true,
-    rating: 4,
-  },
-  {
-     image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
-    title: "White Oxford Button-Down Shirt",
     price: 259,
     originalPrice: 340,
     isOnSale: true,
     rating: 4,
-  
-  }
+    categories: ["sale"],
+  },
+ 
 ];
 
 export default function DealOfWeek() {
@@ -100,7 +99,7 @@ export default function DealOfWeek() {
   const pad = (n) => n.toString().padStart(2, "0");
 
   return (
-    <section className="bg-[#F2F2F2] py-16 md:py-24">
+    <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10">
@@ -110,12 +109,13 @@ export default function DealOfWeek() {
             </h2>
 
             {/* Countdown */}
-            <div className="flex items-center gap-2 flex-wrap ">
+            <div className="flex  items-center gap-2 flex-wrap ">
               <span className="text-sm text-[#555] mr-2">
                 Hurry up! Offer ends in:
               </span>
 
-              {[
+             <div className="flex items-center gap-2">
+                 {[
                 { label: "DAYS", value: timeLeft.days },
                 { label: "HRS", value: timeLeft.hours },
                 { label: "MIN", value: timeLeft.minutes },
@@ -131,6 +131,7 @@ export default function DealOfWeek() {
                   </span>
                 </div>
               ))}
+             </div>
             </div>
           </div>
 

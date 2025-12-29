@@ -11,7 +11,7 @@ const tabs = [
 
 const products = [
   {
-    image: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
+    image: "/assets/product/prodImg1.jpg",
     title: "Burgundy Wool Double-Breasted Coat",
     price: 289,
     originalPrice: 420,
@@ -20,7 +20,7 @@ const products = [
     categories: ["bestseller", "sale", "trending"],
   },
   {
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+    image: "/assets/product/prodImg2.jpg",
     title: "Cream Cable Knit Turtleneck Sweater",
     price: 149,
     isNew: true,
@@ -28,7 +28,7 @@ const products = [
     categories: ["new", "trending"],
   },
   {
-    image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446",
+    image: "/assets/product/prodImg3.jpg",
     title: "Elegant Black Wrap Midi Dress",
     price: 199,
     originalPrice: 279,
@@ -37,14 +37,14 @@ const products = [
     categories: ["sale", "bestseller"],
   },
   {
-    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246",
+    image: "/assets/product/prodImg4.jpg",
     title: "Classic Blue Straight-Leg Jeans",
     price: 129,
     rating: 4,
     categories: ["trending"],
   },
   {
-    image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475",
+    image: "/assets/product/prodImg5.jpg",
     title: "Olive Green Premium Hoodie",
     price: 89,
     isNew: true,
@@ -52,14 +52,14 @@ const products = [
     categories: ["new"],
   },
   {
-    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
+    image: "/assets/product/prodImg6.jpg",
     title: "Camel Belted Trench Coat",
     price: 349,
     rating: 5,
     categories: ["bestseller", "trending"],
   },
   {
-    image: "https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0",
+    image: "/assets/product/prodImg7.jpg",
     title: "Navy Double-Breasted Blazer",
     price: 259,
     originalPrice: 340,
@@ -68,7 +68,7 @@ const products = [
     categories: ["sale"],
   },
   {
-    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
+    image: "/assets/product/prodImg8.jpg",
     title: "White Oxford Button-Down Shirt",
     price: 79,
     rating: 4,
@@ -85,7 +85,7 @@ const filteredProducts = products.filter(product =>
 
 
   return (
-    <section className="bg-[#F2F2F2] py-16 md:py-24">
+    <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
@@ -99,7 +99,7 @@ const filteredProducts = products.filter(product =>
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-6">
   {tabs.map((tab) => (
     <button
       key={tab.value}

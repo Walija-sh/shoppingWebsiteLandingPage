@@ -108,7 +108,12 @@ const navConfig = [
       <div className="bg-black text-white text-sm px-4 py-2">
         <div className="max-w-7xl mx-auto flex justify-between">
           <span>Free shipping worldwide on orders over $199</span>
-          <span className="hidden md:block">support@fashion.com</span>
+          <div className="hidden md:flex items-center gap-2">
+
+          <a href="mailto:support@fashion.com" className="">support@fashion.com</a>
+          <span className="w-[1px] h-3 bg-white shrink-0 "></span>
+          <a href="tel:+12345678900" className="">+1 (234) 567-8900</a>
+          </div>
         </div>
       </div>
 
