@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -35,11 +35,16 @@ export default function Hero() {
   return (
     <section className="relative bg-[#F2F2F2]">
       <Swiper
-        modules={[Pagination]}
+        modules={[Pagination,Autoplay]}
         pagination={{ clickable: true }}
         spaceBetween={0}
         slidesPerView={1}
         loop={true}
+         autoplay={{
+    delay: 3000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true,
+  }}
         
       >
         {slides.map((slide, index) => (
