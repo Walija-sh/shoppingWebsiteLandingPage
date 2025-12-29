@@ -158,7 +158,7 @@ export default function DealOfWeek() {
             pauseOnMouseEnter: true,
           }}
           loop={true}
-          spaceBetween={16}
+          spaceBetween={20}
           slidesPerView={2}
           breakpoints={{
             768: { slidesPerView: 3 },

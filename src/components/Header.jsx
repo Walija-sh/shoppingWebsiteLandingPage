@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
-import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
-import { CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
+
+import { CiHeart, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
+import { GoHeart } from "react-icons/go";
 import { VscMenu } from "react-icons/vsc";
 import { TfiClose } from "react-icons/tfi";
 
@@ -217,7 +218,11 @@ const navConfig = [
               0
             </span>
           </div>
-          <CiUser className="cursor-pointer hover:text-[#8B2C34] transition-all duration-75 ease-linear" />
+          <Link to="#">
+          <CiHeart className="cursor-pointer hover:text-[#8B2C34] transition-all duration-75 ease-linear" /></Link>
+          <Link to="#">
+           <CiUser className="cursor-pointer hover:text-[#8B2C34] transition-all duration-75 ease-linear" /></Link>
+         
           <button
             className="lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

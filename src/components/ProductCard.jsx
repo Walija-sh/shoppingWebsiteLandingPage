@@ -24,7 +24,7 @@ export default function ProductCard({
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           {isOnSale && (
-            <span className="bg-[#8B2C34] text-white text-xs px-2 py-1 uppercase tracking-wide">
+            <span className="bg-red-600 text-white text-xs px-2 py-1 uppercase tracking-wide">
               Sale
             </span>
           )}
