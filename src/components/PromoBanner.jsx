@@ -1,4 +1,4 @@
-
+import { GoArrowRight } from "react-icons/go";
 
 const promoBanners = [
   {
@@ -12,47 +12,51 @@ const promoBanners = [
   {
     image: "/assets/product/prodImg2.jpg",
     alt: "Elegant coats collection",
-    tag: "Coat & Jackets",
+    tag: "Coats & Jackets",
     title: "The New Fashion Collection",
-    cta: "Shop Now",
+    cta: "Discover",
     link: "#",
   },
 ];
+
 export default function PromoBanner() {
   return (
-    <section className="py-8 max-w-7xl mx-auto px-4 md:px-6 lg:px-10">
-      <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          {promoBanners.map((banner) => (
-            <a
-              key={banner.title}
-              href={banner.link}
-              className="relative group overflow-hidden aspect-[4/3] md:aspect-[16/10]"
-            >
-              <img
-                src={banner.image}
-                alt={banner.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+    <section className="py-12 max-w-7xl mx-auto px-4 md:px-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {promoBanners.map((banner) => (
+          <a
+            key={banner.title}
+            href={banner.link}
+            className="group relative rounded-[32px] md:rounded-[40px] overflow-hidden bg-black text-white flex flex-col justify-end p-6 md:p-10"
+            style={{
+              backgroundImage: `url(${banner.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            {/* Content */}
+            <div className="relative flex flex-col gap-6">
+              {/* Tag */}
+              <span className="w-fit backdrop-blur-md bg-white/20 border border-white/30 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">
+                {banner.tag}
+              </span>
 
-              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                <span className="text-white/80 text-sm uppercase tracking-wider font-medium">
-                  {banner.tag}
-                </span>
+              {/* Title */}
+              <h3 className="text-3xl md:text-5xl font-bold leading-[1.1] tracking-tight max-w-xl">
+                {banner.title}
+              </h3>
 
-                <h3 className="font-playfair text-2xl md:text-3xl text-white font-medium mt-1 mb-2">
-                  {banner.title}
-                </h3>
-
-                <span className="inline-block mt-4 px-6 py-2 bg-white text-black text-sm font-medium hover:opacity-90 transition">
-                  {banner.cta}
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
+              {/* CTA */}
+              <button className="mt-2 w-fit bg-white text-black px-8 py-3.5 rounded-full text-sm font-bold flex items-center gap-3 transition-all duration-300 hover:bg-gray-200 hover:gap-4">
+                {banner.cta}
+                <GoArrowRight className="text-lg" />
+              </button>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
   );

@@ -1,17 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
-
-import { CiHeart, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
-import { GoHeart } from "react-icons/go";
-import { VscMenu } from "react-icons/vsc";
-import { TfiClose } from "react-icons/tfi";
-
-export default function Header() {
-  const [activeMenu, setActiveMenu] = useState(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileOpenItem, setMobileOpenItem] = useState(null);
-  const headerRef = useRef(null);
+import { HiChevronDown, HiBars3, HiXMark } from "react-icons/hi2";
+import { GoSearch, GoPerson, GoHeart, GoInbox } from "react-icons/go";
 
 const navConfig = [
   {
@@ -29,8 +19,7 @@ const navConfig = [
         { label: "Winter Collection", to: "#" },
         { label: "Vacation Wear", to: "#" },
       ],
-      image:
-        "https://images.unsplash.com/photo-1617790274211-cbe0e677b425?w=600",
+      image: "https://images.unsplash.com/photo-1617790274211-cbe0e677b425?w=600",
     },
   },
   {
@@ -48,43 +37,26 @@ const navConfig = [
         { label: "Casual", to: "#" },
         { label: "Evening", to: "#" },
       ],
-      image:
-        "https://images.unsplash.com/photo-1696489283182-0446be970e40?w=600",
+      image: "https://images.unsplash.com/photo-1696489283182-0446be970e40?w=600",
     },
   },
-  {
-    label: "Men",
-    to: "#",
-    mega: {
-      categories: [
-        { label: "Shirts", to: "#" },
-        { label: "Jackets", to: "#" },
-        { label: "Jeans", to: "#" },
-        { label: "T-Shirts", to: "#" },
-      ],
-      collections: [
-        { label: "Formal", to: "#" },
-        { label: "Sportswear", to: "#" },
-        { label: "Weekend", to: "#" },
-      ],
-      image:
-        "https://images.unsplash.com/photo-1622450180332-3da1126f10a4?w=600",
-    },
-  },
-  {
-    label: "Kids",
-    to: "#",
-  },
-  {
-    label: "Deals",
-    to: "#",
-  },
-  {
-    label: "Blog",
-    to: "#",
-  },
+  { label: "Men", to: "#" },
+  { label: "New Tech", to: "#" },
+  { label: "Support", to: "#" },
 ];
 
+export default function Header() {
+  const [activeMenu, setActiveMenu] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef(null);
+
+  // Handle scroll effect for glassmorphism
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Close mega menu on outside click
   useEffect(() => {
@@ -93,243 +65,124 @@ const navConfig = [
         setActiveMenu(null);
       }
     }
-
     document.addEventListener("mousedown", handleOutsideClick);
-    return () =>
-      document.removeEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-50 bg-white shadow-sm"
+      className={`fixed top-0 w-full z-[100] transition-all duration-300 ${
+        scrolled ? "bg-white/80 backdrop-blur-lg border-b border-gray-100 py-3" : "bg-white py-5"
+      }`}
     >
-      {/* Top Bar */}
-      <div className="bg-black text-white text-sm px-4 py-2">
-        <div className="max-w-7xl mx-auto flex justify-between">
-          <span>Free shipping worldwide on orders over $199</span>
-          <div className="hidden md:flex items-center gap-2">
-
-          <a href="mailto:support@fashion.com" className="">support@fashion.com</a>
-          <span className="w-[1px] h-3 bg-white shrink-0 "></span>
-          <a href="tel:+12345678900" className="">+1 (234) 567-8900</a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Header */}
-      <div className="relative max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="text-2xl md:text-3xl lg:text-4xl font-playfair ">FASHION</div>
+      <div className="max-w-[1600px] mx-auto px-6 md:px-10 flex items-center justify-between">
+        
+        {/* Logo */}
+        <Link to="/" className="text-2xl font-black tracking-tighter uppercase leading-none">
+          Brand.
+        </Link>
 
         {/* Desktop Navigation */}
-       <nav className="hidden lg:flex gap-8">
-  {navConfig.map((item) => {
-    const hasMega = !!item.mega;
-    const isOpen = activeMenu === item.label;
+        <nav className="hidden lg:flex items-center gap-10">
+          {navConfig.map((item) => {
+            const hasMega = !!item.mega;
+            const isOpen = activeMenu === item.label;
 
-    return (
-      <div key={item.label}>
-        <button
-          onClick={() =>
-            setActiveMenu(isOpen ? null : item.label)
-          }
-          className="flex items-center gap-1 cursor-pointer text-[#333] hover:opacity-70"
-        >
-          {item.label}
-          {hasMega && (
-            <HiChevronDown
-              className={`transition-transform ${
-                isOpen ? "rotate-180" : ""
-              }`}
-            />
-          )}
-        </button>
+            return (
+              <div key={item.label} className="relative">
+                <button
+                  onMouseEnter={() => hasMega && setActiveMenu(item.label)}
+                  className="flex items-center gap-1 text-[13px] font-bold uppercase tracking-widest text-gray-900 hover:text-gray-500 transition-colors"
+                >
+                  {item.label}
+                  {hasMega && <HiChevronDown className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />}
+                </button>
 
-        {isOpen && hasMega && (
-          <div className="absolute left-0 top-full w-screen bg-white shadow-xl">
-            <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Categories */}
-              <div>
-                <h4 className=" font-bold uppercase text-[#444444] mb-4">
-                  Categories
-                </h4>
-                <ul className="space-y-2">
-                  {item.mega.categories.map((c) => (
-                    <li key={c.label}>
-                      <Link
-                        to={c.to}
-                        onClick={() => setActiveMenu(null)}
-                        className="text-[#555555] hover:text-black"
-                      >
-                        {c.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Collections */}
-              <div>
-                <h4 className=" font-bold uppercase text-[#444444] mb-4">
-                  Collections
-                </h4>
-                <ul className="space-y-2">
-                  {item.mega.collections.map((c) => (
-                    <li key={c.label}>
-                      <Link
-                        to={c.to}
-                        onClick={() => setActiveMenu(null)}
-                        className="text-[#555555] hover:text-black"
-                      >
-                        {c.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Image */}
-              <div className="relative h-56  overflow-hidden">
-                <img
-                  src={item.mega.image}
-                  className="w-full h-full object-cover"
-                  alt=""
-                />
-                <div className="absolute inset-0 bg-black/30 flex items-end p-4">
-                  <Link
-                    to={item.to}
-                    onClick={() => setActiveMenu(null)}
-                    className="text-black bg-white px-4 py-2 text-xl"
+                {/* Desktop Mega Menu Dropdown */}
+                {isOpen && hasMega && (
+                  <div 
+                    onMouseLeave={() => setActiveMenu(null)}
+                    className="absolute top-[40px] -left-10 w-[700px] bg-white rounded-[32px] shadow-2xl border border-gray-100 p-8 grid grid-cols-3 gap-10 animate-in fade-in slide-in-from-top-2"
                   >
-                    Shop Now
-                  </Link>
-                </div>
+                    <div>
+                      <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 mb-6">Categories</h4>
+                      <ul className="space-y-4">
+                        {item.mega.categories.map((c) => (
+                          <li key={c.label}>
+                            <Link to={c.to} className="text-sm font-semibold text-gray-900 hover:text-gray-600 transition-colors">{c.label}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 mb-6">Featured</h4>
+                      <ul className="space-y-4">
+                        {item.mega.collections.map((c) => (
+                          <li key={c.label}>
+                            <Link to={c.to} className="text-sm font-semibold text-gray-900 hover:text-gray-600 transition-colors">{c.label}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="relative rounded-2xl overflow-hidden group">
+                      <img src={item.mega.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="" />
+                      <div className="absolute inset-0 bg-black/20 flex items-end p-4">
+                        <Link to={item.to} className="w-full text-center bg-white py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-gray-100 transition-colors">
+                          View All
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  })}
-</nav>
+            );
+          })}
+        </nav>
 
-
-        {/* Right Icons */}
-        <div className="flex items-center gap-4 text-xl lg:text-2xl">
-          <CiSearch className="cursor-pointer hover:text-[#8B2C34] transition-all duration-75 ease-linear" />
-          <div className="relative">
-            <CiShoppingCart className="cursor-pointer hover:text-[#8B2C34] transition-all duration-75 ease-linear" />
-            <span className="absolute -top-2 -right-2 bg-[#8B2C34] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+        {/* Action Icons */}
+        <div className="flex items-center gap-5 md:gap-7">
+          <button className="text-xl hover:text-gray-400 transition-colors"><GoSearch /></button>
+          <button className="text-xl hover:text-gray-400 transition-colors hidden md:block"><GoHeart /></button>
+          
+          <button className="relative text-xl hover:text-gray-400 transition-colors">
+            <GoInbox />
+            <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
               0
             </span>
-          </div>
-          <Link to="#">
-          <CiHeart className="cursor-pointer hover:text-[#8B2C34] transition-all duration-75 ease-linear" /></Link>
-          <Link to="#">
-           <CiUser className="cursor-pointer hover:text-[#8B2C34] transition-all duration-75 ease-linear" /></Link>
-         
+          </button>
+          
+          <button className="text-xl hover:text-gray-400 transition-colors hidden md:block"><GoPerson /></button>
+
           <button
-            className="lg:hidden"
+            className="lg:hidden text-2xl"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <TfiClose className="cursor-pointer" /> : <VscMenu className="cursor-pointer" />}
+            {mobileMenuOpen ? <HiXMark /> : <HiBars3 />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {/* Mobile Menu */}
-{mobileMenuOpen && (
-  <div className="lg:hidden border-t border-[#e5e5e5] px-4 py-6 space-y-4">
-    {navConfig.map((item) => {
-      const hasMega = !!item.mega;
-      const isOpen = mobileOpenItem === item.label;
-
-      return (
-        <div key={item.label}>
-          {/* Top-level item */}
-          <div className="flex justify-between items-center">
-            <Link
-              to={item.to}
-              className="text-[#333333] font-medium"
-              onClick={() => {
-                if (!hasMega) {
-                  setMobileMenuOpen(false);
-                  setMobileOpenItem(null);
-                }
-              }}
-            >
-              {item.label}
-            </Link>
-
-            {hasMega && (
-              <button
-                onClick={() =>
-                  setMobileOpenItem(isOpen ? null : item.label)
-                }
-                className="ml-2"
-              >
-                {isOpen ? <HiChevronUp /> : <HiChevronDown />}
-              </button>
-            )}
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 top-[70px] bg-white z-[90] p-6 lg:hidden animate-in fade-in slide-in-from-right">
+          <div className="space-y-8">
+            {navConfig.map((item) => (
+              <div key={item.label} className="border-b border-gray-50 pb-4">
+                <Link 
+                  to={item.to} 
+                  className="text-2xl font-bold tracking-tight"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              </div>
+            ))}
           </div>
-
-          {/* Expanded Mega Content */}
-          {isOpen && hasMega && (
-            <div className="mt-4 ml-3 space-y-5">
-              {/* Categories */}
-              <div>
-                <h5 className="text-xs font-bold uppercase text-[#444444] mb-2">
-                  Categories
-                </h5>
-                <ul className="space-y-2">
-                  {item.mega.categories.map((c) => (
-                    <li key={c.label}>
-                      <Link
-                        to={c.to}
-                        className="text-sm text-[#555555]"
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          setMobileOpenItem(null);
-                        }}
-                      >
-                        {c.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Collections */}
-              <div>
-                <h5 className="text-xs font-bold uppercase text-[#444444] mb-2">
-                  Collections
-                </h5>
-                <ul className="space-y-2">
-                  {item.mega.collections.map((c) => (
-                    <li key={c.label}>
-                      <Link
-                        to={c.to}
-                        className="text-sm text-[#555555]"
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          setMobileOpenItem(null);
-                        }}
-                      >
-                        {c.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )}
         </div>
-      );
-    })}
-  </div>
-)}
-
+      )}
     </header>
   );
 }
