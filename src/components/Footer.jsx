@@ -21,17 +21,7 @@ const footerLinks = [
       { label: "Store Locator", href: "#" },
       { label: "Careers", href: "#" },
     ],
-  },
-  {
-    title: "Your Account",
-    links: [
-      { label: "My Account", href: "#" },
-      { label: "Order History", href: "#" },
-      { label: "Wishlist", href: "#" },
-      { label: "Newsletter", href: "#" },
-      { label: "Track Order", href: "#" },
-    ],
-  },
+  }
 ];
 
 const socialLinks = [
@@ -41,7 +31,7 @@ const socialLinks = [
   { label: "YouTube", href: "#", icon: FaYoutube },
 ];
 
-const paymentMethods = ["Visa", "Mastercard", "PayPal", "Apple Pay"];
+
 
 export default function Footer() {
   return (
@@ -124,17 +114,11 @@ export default function Footer() {
             <p className="text-xs font-medium text-gray-500 tracking-wider">
               © 2025 BRAND. DESIGNED FOR THE MODERN ERA.
             </p>
+            <p className="text-xs font-medium text-gray-500 tracking-wider">
+              Powered By BRAND
+            </p>
 
-            <div className="flex gap-6 items-center">
-              {paymentMethods.map((method) => (
-                <span
-                  key={method}
-                  className="text-[10px] font-bold text-gray-600 uppercase tracking-tighter"
-                >
-                  {method}
-                </span>
-              ))}
-            </div>
+            
           </div>
           
         </div>
