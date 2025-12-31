@@ -15,7 +15,7 @@ export default function ProductCard({
   return (
     <div className="group bg-white rounded-[32px] p-3 border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
       
-      {/* Image Container */}
+      
       <div className="relative aspect-square rounded-[24px] bg-[#F5F5F7] overflow-hidden mb-4 flex items-center justify-center">
         <img
           src={image}
@@ -37,7 +37,7 @@ export default function ProductCard({
           )}
         </div>
 
-        {/* Wishlist (ABOVE overlay, clickable) */}
+        
         <button
           onClick={() => setIsFav((prev) => !prev)}
           className="absolute top-3 right-3 z-30 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer"
@@ -49,10 +49,10 @@ export default function ProductCard({
           )}
         </button>
 
-        {/* Overlay (visual only, DOES NOT BLOCK) */}
+        
         <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/5 backdrop-blur-[2px] transition-all duration-300 pointer-events-none">
           
-          {/* Add to Bag (re-enable pointer events) */}
+          
           <button className="pointer-events-auto bg-white text-black px-6 py-3 rounded-full flex items-center gap-2 text-sm font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 cursor-pointer">
             <HiOutlineShoppingBag className="text-lg" />
             Add to Bag
@@ -60,7 +60,7 @@ export default function ProductCard({
         </div>
       </div>
 
-      {/* Info */}
+    
       <div className="px-2 pb-2">
         <h3 className="text-[15px] font-semibold text-gray-900 line-clamp-1 mb-1">
           {title}

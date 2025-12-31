@@ -12,7 +12,7 @@ export default function DealOfWeek() {
     <section className="bg-white py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         
-        {/* Pod Container - plain white now */}
+       
         <div className="bg-white rounded-[40px] py-6 md:py-12 relative overflow-hidden">
 
           {/* Header */}
@@ -21,7 +21,7 @@ export default function DealOfWeek() {
               Best Seller
             </h2>
 
-            {/* Navigation Buttons */}
+            
             <div className="hidden lg:flex gap-4">
               <button className="deal-prev w-14 h-14 bg-white rounded-full flex items-center justify-center text-black shadow-sm hover:bg-black hover:text-white transition-all duration-300 disabled:opacity-50 cursor-pointer">
                 <FaChevronLeft className="text-lg" />
@@ -32,7 +32,7 @@ export default function DealOfWeek() {
             </div>
           </div>
 
-          {/* Slider */}
+         
           <Swiper
             modules={[Navigation, Autoplay]}
             navigation={{

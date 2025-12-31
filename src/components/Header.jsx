@@ -8,7 +8,7 @@ import {
 } from "react-icons/hi2";
 import { GoSearch, GoHeart, GoInbox } from "react-icons/go";
 
-/* ---------- NAV CONFIG ---------- */
+
 export const navConfig = [
   { label: "Home", to: "/" },
   {
@@ -96,7 +96,7 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const headerRef = useRef(null);
 
-  /* Close desktop menus on outside click */
+  
   useEffect(() => {
     const handler = (e) => {
       if (headerRef.current && !headerRef.current.contains(e.target)) {
@@ -109,7 +109,7 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  /* Lock body scroll on mobile menu */
+ 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
     return () => (document.body.style.overflow = "");
@@ -131,12 +131,12 @@ export default function Header() {
       className="fixed top-0 w-full z-[100] bg-white border-b border-[#eee]"
     >
       <div className="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
+        
         <Link to="/" className="text-2xl font-black uppercase">
           Brand.
         </Link>
 
-        {/* DESKTOP NAV */}
+        
         <nav className="hidden lg:flex items-center gap-10 relative">
           {navConfig.map((item) => {
             if (!item.mega) {
@@ -251,7 +251,7 @@ export default function Header() {
           })}
         </nav>
 
-        {/* ACTIONS */}
+        
         <div className="flex items-center gap-5">
           {/* Search */}
           <div className="relative flex items-center gap-2">

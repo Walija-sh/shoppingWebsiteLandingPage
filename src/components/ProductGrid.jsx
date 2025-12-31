@@ -24,13 +24,13 @@ export default function ProductGrid() {
   return (
     <section className="bg-white py-20">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
+        
         <div className="flex flex-col items-center text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-black mb-4">
             The Latest & Greatest
           </h2>
 
-          {/* Tabs */}
+          
           <div className="flex flex-wrap bg-[#F5F5F7] p-1.5 rounded-full mt-4">
             {tabs.map((tab) => (
               <button
@@ -48,8 +48,7 @@ export default function ProductGrid() {
           </div>
         </div>
 
-        {/* PRODUCT SWIPER */}
-       {/* PRODUCT SWIPER */}
+        
 <Swiper
   loop={true}
   spaceBetween={24}
@@ -78,7 +77,7 @@ export default function ProductGrid() {
 </Swiper>
 
 
-        {/* CTA */}
+       
         <div className="mt-16 flex justify-center">
           <button className="px-12 py-4 bg-[#F5F5F7] text-black rounded-full text-sm font-bold hover:bg-black hover:text-white transition shadow-sm">
             View All Collection

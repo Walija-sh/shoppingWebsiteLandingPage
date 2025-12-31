@@ -38,7 +38,7 @@ export default function BannerGroupOne() {
           >
             
 
-            {/* Button */}
+            
             <div className="relative p-6 md:p-10 w-full flex justify-end">
               <Link to='#' className="bg-white text-black px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 hover:bg-gray-200 transition-all duration-300 cursor-pointer">
                 View More

@@ -36,13 +36,13 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="bg-white pt-10">
-      {/* The Modern Pod Container */}
+      
       <div className="bg-black text-white rounded-t-[48px] md:rounded-t-[64px] overflow-hidden">
         <div className="max-w-[1600px] mx-auto px-8 md:px-16 pt-20 pb-10">
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8">
             
-            {/* Brand Section */}
+            
             <div className="lg:col-span-2 space-y-6">
               <a href="#" className="text-3xl font-black tracking-tighter uppercase">
                 Brand.
@@ -70,7 +70,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Link Columns */}
+            
             {footerLinks.map((section) => (
               <div key={section.title} className="lg:col-span-1">
                 <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-gray-200">
@@ -91,7 +91,7 @@ export default function Footer() {
               </div>
             ))}
 
-            {/* Contact Column */}
+            
             <div className="lg:col-span-1">
               <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-gray-200">
                 Contact
@@ -109,7 +109,7 @@ export default function Footer() {
 
           </div>
 
-          {/* Bottom Bar */}
+          
           <div className="mt-20 pt-10 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
             <p className="text-xs font-medium text-gray-500 tracking-wider">
               © 2025 BRAND. DESIGNED FOR THE MODERN ERA.

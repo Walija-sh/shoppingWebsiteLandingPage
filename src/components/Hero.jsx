@@ -36,7 +36,7 @@ export default function Hero() {
         </Swiper>
       </div>
 
-      {/* Pagination styling */}
+      
       <style
         dangerouslySetInnerHTML={{
           __html: `
