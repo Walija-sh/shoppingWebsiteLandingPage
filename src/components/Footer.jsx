@@ -1,25 +1,24 @@
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
 
+
 const footerLinks = [
   {
     title: "Quick Links",
     links: [
+      { label: "Home", href: "/" },
+      { label: "Collections", href: "#" },
       { label: "Shop", href: "#" },
-      { label: "About Us", href: "#" },
-      { label: "Contact", href: "#" },
-      { label: "FAQ", href: "#" },
-      { label: "Size Guide", href: "#" },
+      { label: "Contact Us", href: "#" },
+      
     ],
   },
   {
-    title: "Support",
+    title: "Policies",
     links: [
-      { label: "Shipping & Returns", href: "#" },
-      { label: "Order Tracking", href: "#" },
-      { label: "Gift Cards", href: "#" },
-      { label: "Store Locator", href: "#" },
-      { label: "Careers", href: "#" },
+      { label: "Shipping Policy", href: "#" },
+      { label: "Return Policy", href: "#" },
+      
     ],
   }
 ];
