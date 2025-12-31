@@ -1,12 +1,12 @@
 import { GoArrowRight } from "react-icons/go";
 
-const flashSaleData = {
-  tag: "Limited Time Offer",
-  title: "Up to",
-  highlight: "80%",
-  subtitle: "Off",
-  description: "On selected premium items • Ends Dec 31",
-  cta: "Shop Now",
+export const flashSaleData = {
+  tag: "Limited Offer",
+  title: "Save Up To",
+  highlight: "50%",
+  subtitle: "Today",
+  description: "On selected items across multiple categories",
+  cta: "Shop Deals",
   link: "#",
 };
 

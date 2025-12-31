@@ -6,24 +6,34 @@ import "swiper/css/pagination";
 
 const slides = [
   {
-    badge: "Limited Edition",
-    heading: "The Future of Style",
+    badge: "New Arrivals",
+    heading: "Designed for Everyday Use",
     subheading:
-      "Designed for the modern era. Experience unmatched comfort and aesthetics.",
+      "Explore high-quality products built for comfort, performance, and daily reliability all in one place.",
     cta1: "Shop Now",
-    cta2: "View Gallery",
-    img: "/assets/hero/heroImg1.png",
+    cta2: "Browse Collection",
+    img: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
     themeColor: "#000000",
   },
   {
-    badge: "New Season",
-    heading: "Fresh Daily Essentials",
+    badge: "Trending",
+    heading: "Quality That Fits Your Lifestyle",
     subheading:
-      "Premium quality materials met with minimalist design principles.",
-    cta1: "Explore",
+      "From essentials to upgrades, discover products selected to match modern needs and active routines.",
+    cta1: "Explore Products",
+    cta2: "View Categories",
+    img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+    themeColor: "#1F2937",
+  },
+  {
+    badge: "Best Sellers",
+    heading: "Built for Performance & Comfort",
+    subheading:
+      "Reliable designs, premium materials, and practical solutions made to support everyday tasks.",
+    cta1: "See Best Sellers",
     cta2: "Learn More",
-    img: "/assets/hero/heroImg2.png",
-    themeColor: "#2D31FA",
+    img: "https://images.unsplash.com/photo-1503602642458-232111445657",
+    themeColor: "#111827",
   },
 ];
 
@@ -39,10 +49,10 @@ export default function Hero() {
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
-              <div className="relative min-h-screen flex items-center px-8 md:px-16 lg:px-24">
+              <div className="relative min-h-[600px] flex items-center px-8 md:px-16 lg:px-24">
                 
                 {/* Text Content */}
-                <div className="relative z-20 w-full md:w-1/2 flex flex-col items-start text-left">
+                <div className="relative z-20 w-full  flex flex-col items-start text-left">
                   <span
                     className="mb-6 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] bg-white shadow-sm"
                     style={{ color: slide.themeColor }}
@@ -76,11 +86,11 @@ export default function Hero() {
                 </div>
 
                 {/* Image */}
-                <div className=" absolute inset-0 z-10 hidden  md:flex items-center justify-end pointer-events-none pr-0 md:pr-10 lg:pr-20">
+                <div className=" z-10 hidden  md:flex items-center justify-end pointer-events-none ">
                   <img
                     src={slide.img}
                     alt={slide.heading}
-                    className="w-[80%] md:w-[60%] lg:w-[50%] h-auto max-h-[250px] lg:max-h-[400px] object-contain drop-shadow-2xl"
+                    className=" h-auto max-h-[250px] lg:max-h-[400px] object-contain drop-shadow-2xl"
                   />
                 </div>
               </div>

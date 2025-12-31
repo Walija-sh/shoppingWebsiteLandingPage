@@ -2,22 +2,23 @@ import { GoArrowRight } from "react-icons/go";
 
 const promoBanners = [
   {
-    image: "/assets/product/prodImg1.jpg",
-    alt: "Cozy sweaters collection",
-    tag: "Winter Collection",
-    title: "Up to 40% Off Sweaters",
+    image: "https://images.unsplash.com/photo-1503602642458-232111445657",
+    alt: "New arrivals promotion",
+    tag: "New Arrivals",
+    title: "Latest Products, Modern Design",
     cta: "Shop Now",
     link: "#",
   },
   {
-    image: "/assets/product/prodImg2.jpg",
-    alt: "Elegant coats collection",
-    tag: "Coats & Jackets",
-    title: "The New Fashion Collection",
-    cta: "Discover",
+    image: "https://images.unsplash.com/photo-1519744792095-2f2205e87b6f",
+    alt: "Premium essentials promotion",
+    tag: "Limited Offer",
+    title: "Premium Essentials at Special Prices",
+    cta: "Discover More",
     link: "#",
   },
 ];
+
 
 export default function PromoBanner() {
   return (

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ProductCard from "./ProductCard";
+import { products } from "../data/products.js";
 
 const tabs = [
   { label: "Best Sellers", value: "bestseller" },
@@ -8,79 +9,15 @@ const tabs = [
   { label: "Trending", value: "trending" },
 ];
 
-const products = [
-  {
-    image: "/assets/product/prodImg1.jpg",
-    title: "Burgundy Wool Double-Breasted Coat",
-    price: 289,
-    originalPrice: 420,
-    isOnSale: true,
-    rating: 5,
-    categories: ["bestseller", "sale", "trending"],
-  },
-  {
-    image: "/assets/product/prodImg2.jpg",
-    title: "Cream Cable Knit Turtleneck Sweater",
-    price: 149,
-    isNew: true,
-    rating: 4,
-    categories: ["new", "trending"],
-  },
-  {
-    image: "/assets/product/prodImg3.jpg",
-    title: "Elegant Black Wrap Midi Dress",
-    price: 199,
-    originalPrice: 279,
-    isOnSale: true,
-    rating: 5,
-    categories: ["sale", "bestseller"],
-  },
-  {
-    image: "/assets/product/prodImg4.jpg",
-    title: "Classic Blue Straight-Leg Jeans",
-    price: 129,
-    rating: 4,
-    categories: ["trending"],
-  },
-  {
-    image: "/assets/product/prodImg5.jpg",
-    title: "Olive Green Premium Hoodie",
-    price: 89,
-    isNew: true,
-    rating: 4,
-    categories: ["new"],
-  },
-  {
-    image: "/assets/product/prodImg6.jpg",
-    title: "Camel Belted Trench Coat",
-    price: 349,
-    rating: 5,
-    categories: ["bestseller", "trending"],
-  },
-  {
-    image: "/assets/product/prodImg7.jpg",
-    title: "Navy Double-Breasted Blazer",
-    price: 259,
-    originalPrice: 340,
-    isOnSale: true,
-    rating: 4,
-    categories: ["sale"],
-  },
-  {
-    image: "/assets/product/prodImg8.jpg",
-    title: "White Oxford Button-Down Shirt",
-    price: 79,
-    rating: 4,
-    categories: ["bestseller"],
-  },
-];
 
 export default function ProductGrid() {
   const [activeTab, setActiveTab] = useState("bestseller");
 
-  const filteredProducts = products.filter((product) =>
+ const filteredProducts = useMemo(() => {
+  return products.filter((product) =>
     product.categories.includes(activeTab)
   );
+}, [activeTab]);
 
   return (
     <section className="bg-white py-20">

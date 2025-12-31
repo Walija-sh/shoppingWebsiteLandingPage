@@ -4,57 +4,11 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { LuTimer } from "react-icons/lu"; // Importing a clean timer icon
 import ProductCard from "./ProductCard";
+import { dealProducts } from "../data/products.js";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
-const dealProducts = [
-  {
-    image: "/assets/product/prodImg1.jpg",
-    title: "Burgundy Wool Double-Breasted Coat",
-    price: 289,
-    originalPrice: 420,
-    isOnSale: true,
-    rating: 5,
-    categories: ["bestseller", "sale", "trending"],
-  },
-  {
-    image: "/assets/product/prodImg3.jpg",
-    title: "Elegant Black Wrap Midi Dress",
-    price: 199,
-    originalPrice: 279,
-    isOnSale: true,
-    rating: 5,
-    categories: ["sale", "bestseller"],
-  },
-  {
-    image: "/assets/product/prodImg5.jpg",
-    title: "Olive Green Premium Hoodie",
-    price: 89,
-    originalPrice: 99,
-    isOnSale: true,
-    rating: 4,
-    categories: ["new"],
-  },
-  {
-    image: "/assets/product/prodImg6.jpg",
-    title: "Camel Belted Trench Coat",
-    price: 349,
-    originalPrice: 411,
-    isOnSale: true,
-    rating: 5,
-    categories: ["bestseller", "trending"],
-  },
-  {
-    image: "/assets/product/prodImg7.jpg",
-    title: "Navy Double-Breasted Blazer",
-    price: 259,
-    originalPrice: 340,
-    isOnSale: true,
-    rating: 4,
-    categories: ["sale"],
-  },
-];
 
 export default function DealOfWeek() {
   const [timeLeft, setTimeLeft] = useState({
