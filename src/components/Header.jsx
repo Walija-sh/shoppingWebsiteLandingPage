@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import {
   HiChevronDown,
@@ -7,7 +7,6 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 import { GoSearch, GoHeart, GoInbox } from "react-icons/go";
-
 
 export const navConfig = [
   { label: "Home", to: "/" },
@@ -62,7 +61,7 @@ export const navConfig = [
                   { label: "This Month", to: "#" },
                 ],
               },
-              { label: "Editor’s Choice", to: "#" },
+              { label: "Editor's Choice", to: "#" },
             ],
           },
           {
@@ -76,27 +75,41 @@ export const navConfig = [
       },
     ],
   },
-  { label: "About", to: "#" },
+  { label: "Contact", to: "#" },
   { label: "Support", to: "#" },
 ];
 
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(null);
   const [openNested, setOpenNested] = useState(null);
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileOpenItem, setMobileOpenItem] = useState(null);
   const [mobileNestedOpen, setMobileNestedOpen] = useState(null);
-
-  const [isSmallScreen, setIsSmallScreen] = useState(
-  window.innerWidth < 500
-);
-
-
   const [searchOpen, setSearchOpen] = useState(false);
+  
+  const [breakpoints, setBreakpoints] = useState({
+    isSmallScreen: typeof window !== 'undefined' ? window.innerWidth < 640 : false,
+    isMobileScreen: typeof window !== 'undefined' ? window.innerWidth < 1024 : false,
+  });
+  
   const headerRef = useRef(null);
 
-  
+  // Single resize handler
+  const handleResize = useCallback(() => {
+    setBreakpoints({
+      isSmallScreen: window.innerWidth < 640,
+      isMobileScreen: window.innerWidth < 1024,
+    });
+  }, []);
+
+  // Single resize effect
+  useEffect(() => {
+    handleResize(); // Set initial values
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
+
+  // Click outside handler
   useEffect(() => {
     const handler = (e) => {
       if (headerRef.current && !headerRef.current.contains(e.target)) {
@@ -109,35 +122,129 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
- 
+  // Body overflow handler
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
-    return () => (document.body.style.overflow = "");
-  }, [mobileMenuOpen]);
+    if (mobileMenuOpen && breakpoints.isMobileScreen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
-  useEffect(() => {
-  const handleResize = () => {
-    setIsSmallScreen(window.innerWidth < 500);
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen, breakpoints.isMobileScreen]);
+
+  // Memoized render helper for nested items
+  const renderNestedItems = (items, isMobile = false) => {
+    return items.map((item) => {
+      if (item.nested) {
+        const key = `${item.label}-${item.nested.length}`;
+        const isOpen = isMobile ? mobileNestedOpen === key : openNested === key;
+        
+        return (
+          <li key={key} className="cursor-pointer">
+            <button
+              onClick={() => {
+                if (isMobile) {
+                  setMobileNestedOpen(isOpen ? null : key);
+                } else {
+                  setOpenNested(isOpen ? null : key);
+                }
+              }}
+              className="w-full flex cursor-pointer justify-between text-sm font-medium"
+            >
+              {item.label}
+              <HiChevronDown
+                className={`transition ${isOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+
+            {isOpen && (
+              <ul className={`${isMobile ? 'ml-4 mt-2 border-l border-[#eee] pl-4 space-y-1' : 'ml-4 mt-2 border-l border-[#eee] pl-4 space-y-1'}`}>
+                {item.nested.map((nestedItem) => (
+                  <li key={nestedItem.label}>
+                    <Link
+                      to={nestedItem.to}
+                      className={`block ${isMobile ? 'text-sm py-1' : 'text-sm text-[#555]'}`}
+                      onClick={() => isMobile && setMobileMenuOpen(false)}
+                    >
+                      {nestedItem.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        );
+      }
+
+      return (
+        <li key={item.label}>
+          <Link
+            to={item.to}
+            className={`${isMobile ? 'block ml-3 text-sm py-1' : 'text-sm text-[#555]'}`}
+            onClick={() => isMobile && setMobileMenuOpen(false)}
+          >
+            {item.label}
+          </Link>
+        </li>
+      );
+    });
   };
 
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
+  // Render mega menu content
+  const renderMegaMenu = (megaConfig, isMobile = false) => {
+    return megaConfig.map((group) => (
+      <div key={group.title}>
+        {!isMobile && (
+          <p className="text-[11px] uppercase tracking-[0.2em] text-[#999] mb-4">
+            {group.title}
+          </p>
+        )}
+        <ul className={`${isMobile ? 'space-y-2' : 'space-y-4'}`}>
+          {group.items.map((item) => (
+            <li key={item.label}>
+              {!isMobile ? (
+                <>
+                  <p className="font-semibold text-sm mb-2">{item.label}</p>
+                  <ul className="ml-3 space-y-2">
+                    {renderNestedItems(item.children, isMobile)}
+                  </ul>
+                </>
+              ) : (
+                <>
+                  <p className="font-semibold">{item.label}</p>
+                  <div className="ml-3 space-y-2">
+                    {renderNestedItems(item.children, true)}
+                  </div>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ));
+  };
 
+  const { isSmallScreen, isMobileScreen } = breakpoints;
+  const shouldHideLogo = isSmallScreen && searchOpen;
 
   return (
     <header
       ref={headerRef}
-      className="fixed top-0 w-full z-[100] bg-white border-b border-[#eee]"
+      className="fixed top-0 w-full z-[100] bg-white border-b border-[#eee] relative"
     >
       <div className="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
-        
-        <Link to="/" className="text-2xl font-black uppercase">
-          Brand.
-        </Link>
+        {/* Logo */}
+        {!shouldHideLogo && (
+          <Link to="/" className="text-2xl font-black uppercase">
+            Brand.
+          </Link>
+        )}
 
-        
-        <nav className="hidden lg:flex items-center gap-10 relative">
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-10">
           {navConfig.map((item) => {
             if (!item.mega) {
               return (
@@ -156,9 +263,7 @@ export default function Header() {
             return (
               <div key={item.label} className="">
                 <button
-                  onClick={() =>
-                    setActiveMenu(isOpen ? null : item.label)
-                  }
+                  onClick={() => setActiveMenu(isOpen ? null : item.label)}
                   className="flex cursor-pointer items-center gap-1 text-[13px] font-bold uppercase tracking-widest"
                 >
                   {item.label}
@@ -168,82 +273,8 @@ export default function Header() {
                 </button>
 
                 {isOpen && (
-                  <div className="absolute top-[40px] left-0 bg-white border border-[#eee] rounded-[24px] shadow-xl p-8 grid grid-cols-2 gap-12">
-                    {item.mega.map((group) => (
-                      <div key={group.title}>
-                        <p className="text-[11px] uppercase tracking-[0.2em] text-[#999] mb-4">
-                          {group.title}
-                        </p>
-
-                        <ul className="space-y-4">
-                          {group.items.map((i) => (
-                            <li key={i.label}>
-                              <p className="font-semibold text-sm mb-2">
-                                {i.label}
-                              </p>
-
-                              <ul className="ml-3 space-y-2">
-                                {i.children.map((c) => {
-                                  const key = `${i.label}-${c.label}`;
-                                  const isNestedOpen =
-                                    openNested === key;
-
-                                  if (c.nested) {
-                                    return (
-                                      <li key={c.label}>
-                                        <button
-                                          onClick={() =>
-                                            setOpenNested(
-                                              isNestedOpen ? null : key
-                                            )
-                                          }
-                                          className="w-full flex justify-between text-sm font-medium"
-                                        >
-                                          {c.label}
-                                          <HiChevronDown
-                                            className={`transition ${
-                                              isNestedOpen
-                                                ? "rotate-180"
-                                                : ""
-                                            }`}
-                                          />
-                                        </button>
-
-                                        {isNestedOpen && (
-                                          <ul className="ml-4 mt-2 border-l border-[#eee] pl-4 space-y-1">
-                                            {c.nested.map((n) => (
-                                              <li key={n.label}>
-                                                <Link
-                                                  to={n.to}
-                                                  className="block text-sm text-[#555]"
-                                                >
-                                                  {n.label}
-                                                </Link>
-                                              </li>
-                                            ))}
-                                          </ul>
-                                        )}
-                                      </li>
-                                    );
-                                  }
-
-                                  return (
-                                    <li key={c.label}>
-                                      <Link
-                                        to={c.to}
-                                        className="text-sm text-[#555]"
-                                      >
-                                        {c.label}
-                                      </Link>
-                                    </li>
-                                  );
-                                })}
-                              </ul>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+                  <div className="absolute top-[50px] left-0 right-0 w-full bg-white border border-[#eee] rounded-[24px] shadow-xl p-8 grid grid-cols-2 gap-12">
+                    {renderMegaMenu(item.mega)}
                   </div>
                 )}
               </div>
@@ -251,14 +282,14 @@ export default function Header() {
           })}
         </nav>
 
-        
-        <div className="flex items-center gap-5">
+        {/* Right side icons */}
+        <div className="flex items-center gap-5 grow lg:grow-0">
           {/* Search */}
-          <div className="relative flex items-center gap-2">
+          <div className="relative grow w-full flex items-center justify-end gap-2">
             <div
               className={`transition-all duration-300 ${
                 searchOpen
-                  ? " w-full max-w-[220px] opacity-100"
+                  ? "w-full sm:max-w-[220px] opacity-100"
                   : "w-0 opacity-0 pointer-events-none"
               }`}
             >
@@ -269,38 +300,39 @@ export default function Header() {
                 className="w-full border border-[#ddd] rounded-full px-4 py-1.5 text-sm"
               />
             </div>
-            <button className="cursor-pointer" onClick={() => setSearchOpen((p) => !p)}>
+            <button
+              className="cursor-pointer"
+              onClick={() => setSearchOpen((p) => !p)}
+            >
               <GoSearch className="text-xl" />
             </button>
           </div>
 
-          <GoHeart className="hidden md:block text-xl cursor-pointer" />
+          <GoHeart className="hidden md:block text-xl cursor-pointer shrink-0" />
 
-         {!(isSmallScreen && searchOpen) && (
-  <div className="relative text-xl cursor-pointer">
-    <GoInbox />
-    <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
-      0
-    </span>
-  </div>
-)}
-
+          {!shouldHideLogo && (
+            <div className="relative text-xl cursor-pointer">
+              <GoInbox />
+              <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
+                0
+              </span>
+            </div>
+          )}
 
           {/* Mobile toggle */}
-        {!(isSmallScreen && searchOpen) && (
-  <button
-    className="lg:hidden text-2xl cursor-pointer"
-    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-  >
-    {mobileMenuOpen ? <HiXMark /> : <HiBars3 />}
-  </button>
-)}
-
+          {!shouldHideLogo && (
+            <button
+              className="lg:hidden text-2xl cursor-pointer"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <HiXMark /> : <HiBars3 />}
+            </button>
+          )}
         </div>
       </div>
 
-      {/* MOBILE MENU */}
-      {mobileMenuOpen && (
+      {/* Mobile Menu */}
+      {mobileMenuOpen && isMobileScreen && (
         <div className="lg:hidden fixed top-[60px] left-0 right-0 bottom-0 z-[1000] bg-white overflow-y-auto border-t p-6 space-y-6">
           {navConfig.map((item) => {
             if (!item.mega) {
@@ -321,9 +353,7 @@ export default function Header() {
             return (
               <div key={item.label}>
                 <button
-                  onClick={() =>
-                    setMobileOpenItem(open ? null : item.label)
-                  }
+                  onClick={() => setMobileOpenItem(open ? null : item.label)}
                   className="flex justify-between w-full text-lg font-bold"
                 >
                   {item.label}
@@ -332,73 +362,7 @@ export default function Header() {
 
                 {open && (
                   <div className="mt-4 ml-3 space-y-4">
-                    {item.mega.map((group) =>
-                      group.items.map((i) => (
-                        <div key={i.label} className="space-y-2">
-                          <p className="font-semibold">{i.label}</p>
-
-                          {i.children.map((c) => {
-                            const key = `${i.label}-${c.label}`;
-                            const nestedOpen =
-                              mobileNestedOpen === key;
-
-                            if (c.nested) {
-                              return (
-                                <div key={c.label} className="ml-3">
-                                  <button
-                                    onClick={() =>
-                                      setMobileNestedOpen(
-                                        nestedOpen ? null : key
-                                      )
-                                    }
-                                    className="w-full flex justify-between text-sm font-medium"
-                                  >
-                                    {c.label}
-                                    <HiChevronDown
-                                      className={`transition ${
-                                        nestedOpen
-                                          ? "rotate-180"
-                                          : ""
-                                      }`}
-                                    />
-                                  </button>
-
-                                  {nestedOpen && (
-                                    <div className="ml-4 mt-2 border-l border-[#eee] pl-4 space-y-1">
-                                      {c.nested.map((n) => (
-                                        <Link
-                                          key={n.label}
-                                          to={n.to}
-                                          className="block text-sm py-1"
-                                          onClick={() =>
-                                            setMobileMenuOpen(false)
-                                          }
-                                        >
-                                          {n.label}
-                                        </Link>
-                                      ))}
-                                    </div>
-                                  )}
-                                </div>
-                              );
-                            }
-
-                            return (
-                              <Link
-                                key={c.label}
-                                to={c.to}
-                                className="block ml-3 text-sm py-1"
-                                onClick={() =>
-                                  setMobileMenuOpen(false)
-                                }
-                              >
-                                {c.label}
-                              </Link>
-                            );
-                          })}
-                        </div>
-                      ))
-                    )}
+                    {renderMegaMenu(item.mega, true)}
                   </div>
                 )}
               </div>

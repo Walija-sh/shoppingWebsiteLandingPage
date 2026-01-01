@@ -79,7 +79,7 @@ export default function ProductGrid() {
 
        
         <div className="mt-16 flex justify-center">
-          <button className="px-12 py-4 bg-[#F5F5F7] text-black rounded-full text-sm font-bold hover:bg-black hover:text-white transition shadow-sm">
+          <button className="px-12 py-4 bg-[#F5F5F7] text-black rounded-full text-sm font-bold hover:bg-black hover:text-white transition shadow-sm cursor-pointer">
             View All Collection
           </button>
         </div>

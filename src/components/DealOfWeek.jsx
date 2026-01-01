@@ -6,6 +6,7 @@ import { dealProducts } from "../data/products.js";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import { Link } from "react-router-dom";
 
 export default function DealOfWeek() {
   return (
@@ -15,22 +16,41 @@ export default function DealOfWeek() {
        
         <div className="bg-white rounded-[40px] py-6 md:py-12 relative overflow-hidden">
 
-          {/* Header */}
-          <div className="flex justify-between items-end mb-12 relative z-10">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight">
-              Best Seller
-            </h2>
+        
+          
+<div className="flex  justify-between sm:items-end gap-4 mb-12 relative z-10">
+  
+  <h2 className="text-3xl md:text-5xl font-bold w-fit text-gray-900 tracking-tight ">
+    Best Seller
+  </h2>
 
-            
-            <div className="hidden lg:flex gap-4">
-              <button className="deal-prev w-14 h-14 bg-white rounded-full flex items-center justify-center text-black shadow-sm hover:bg-black hover:text-white transition-all duration-300 disabled:opacity-50 cursor-pointer">
-                <FaChevronLeft className="text-lg" />
-              </button>
-              <button className="deal-next w-14 h-14 bg-white rounded-full flex items-center justify-center text-black shadow-sm hover:bg-black hover:text-white transition-all duration-300 disabled:opacity-50 cursor-pointer">
-                <FaChevronRight className="text-lg" />
-              </button>
-            </div>
-          </div>
+ 
+  <div className="flex items-center justify-between sm:justify-end gap-6">
+   
+    <Link to="#"
+  className="group inline-flex items-center cursor-pointer gap-2 text-sm md:text-base font-semibold text-black "
+>
+  <span className="relative ">
+    View All
+    <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-black transition-all duration-300 group-hover:w-full" />
+  </span>
+
+ 
+</Link>
+
+
+  
+    <div className="hidden lg:flex gap-4">
+      <button className="deal-prev w-14 h-14 bg-white rounded-full flex items-center justify-center text-black shadow-sm hover:bg-black hover:text-white transition-all duration-300 disabled:opacity-50 cursor-pointer">
+        <FaChevronLeft className="text-lg" />
+      </button>
+      <button className="deal-next w-14 h-14 bg-white rounded-full flex items-center justify-center text-black shadow-sm hover:bg-black hover:text-white transition-all duration-300 disabled:opacity-50 cursor-pointer">
+        <FaChevronRight className="text-lg" />
+      </button>
+    </div>
+  </div>
+</div>
+
 
          
           <Swiper
