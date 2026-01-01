@@ -13,7 +13,7 @@ const slides = [
 
 export default function Hero() {
   return (
-    <section className="px-4 py-6 md:px-8 md:py-8 bg-white mt-[60px] ">
+    <section className="px-4 py-6 md:px-8 md:py-8 bg-white  ">
       <div className="max-w-7xl mx-auto overflow-hidden rounded-[28px] md:rounded-[40px] shadow-xl">
         <Swiper
           modules={[Pagination,Autoplay]}
