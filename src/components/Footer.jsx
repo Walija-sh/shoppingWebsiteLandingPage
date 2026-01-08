@@ -8,7 +8,7 @@ const footerLinks = [
     links: [
       { label: "Home", href: "/" },
       { label: "Collections", href: "#" },
-      { label: "Shop", href: "#" },
+      { label: "Shop", href: "/shop" },
       { label: "Contact Us", href: "#" },
       
     ],

@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { Link } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 export default function ProductCard({
+  id,
   image,
   title,
   price,
   originalPrice,
   isOnSale,
   isNew,
+  sizes
 }) {
-  const [isFav, setIsFav] = useState(false);
+  
+  const { addToCart, wishlist, addToWishlist, removeFromWishlist } = useContext(AppContext);
+
+const isInWishlist = wishlist.includes(id);
 
   return (
     <div className="group bg-white rounded-[32px] p-3 border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
@@ -38,22 +45,32 @@ export default function ProductCard({
         </div>
 
         
+      
         <button
-          onClick={() => setIsFav((prev) => !prev)}
-          className="absolute top-3 right-3 z-30 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer"
-        >
-          {isFav ? (
-            <GoHeartFill className="text-xl text-[#E11D48]" />
-          ) : (
-            <GoHeart className="text-xl text-black" />
-          )}
-        </button>
+  onClick={() =>
+    isInWishlist ? removeFromWishlist(id) : addToWishlist(id)
+  }
+  className="absolute top-3 right-3 z-30 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer"
+>
+  {isInWishlist ? (
+    <GoHeartFill className="text-xl text-[#E11D48]" />
+  ) : (
+    <GoHeart className="text-xl text-black" />
+  )}
+</button>
 
         
         <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/5 backdrop-blur-[2px] transition-all duration-300 pointer-events-none">
           
           
-          <button className="pointer-events-auto bg-white text-black px-6 py-3 rounded-full flex items-center gap-2 text-sm font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 cursor-pointer">
+          <button onClick={() =>
+  addToCart({
+    productId: id,
+    quantity: 1,
+    selectedSize: sizes[0],
+  })
+}
+ className="pointer-events-auto bg-white text-black px-6 py-3 rounded-full flex items-center gap-2 text-sm font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 cursor-pointer">
             <HiOutlineShoppingBag className="text-lg" />
             Add to Bag
           </button>
@@ -62,9 +79,12 @@ export default function ProductCard({
 
     
       <div className="px-2 pb-2">
+        <Link to={`/product/${id}`}>
+
         <h3 className="text-[15px] font-semibold text-gray-900 line-clamp-1 mb-1">
           {title}
         </h3>
+        </Link>
         <div className="flex items-center gap-2">
           <span className="text-lg font-bold text-black">
             ${price.toFixed(2)}

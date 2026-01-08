@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
 
 const slides = [
   "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
@@ -24,13 +25,13 @@ export default function Hero() {
         >
           {slides.map((img, index) => (
             <SwiperSlide key={index}>
-              <div className="relative h-[260px] sm:h-[360px]  lg:h-[460px]">
+              <Link to='/shop' className="relative block h-[260px] sm:h-[360px]  lg:h-[460px]">
                 <img
                   src={img}
                   alt={`Hero slide ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
-              </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

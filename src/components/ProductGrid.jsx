@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import ProductCard from "./ProductCard";
-import { products } from "../data/products.js";
+
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { Link } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 const tabs = [
   { label: "Best Sellers", value: "bestseller" },
@@ -13,6 +15,7 @@ const tabs = [
 ];
 
 export default function ProductGrid() {
+   const { products } = useContext(AppContext);
   const [activeTab, setActiveTab] = useState("bestseller");
 
   const filteredProducts = useMemo(() => {
@@ -23,7 +26,7 @@ export default function ProductGrid() {
 
   return (
     <section className="bg-white py-20">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 overflow-hidden">
         
         <div className="flex flex-col items-center text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-black mb-4">
@@ -31,21 +34,22 @@ export default function ProductGrid() {
           </h2>
 
           
-          <div className="flex flex-wrap bg-[#F5F5F7] p-1.5 rounded-full mt-4">
-            {tabs.map((tab) => (
-              <button
-                key={tab.value}
-                onClick={() => setActiveTab(tab.value)}
-                className={`px-6 py-2.5 text-sm font-bold cursor-pointer rounded-full transition ${
-                  activeTab === tab.value
-                    ? "bg-white text-black shadow-md"
-                    : "text-gray-500 hover:text-black"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+         <div className="flex overflow-x-scroll no-scrollbar bg-[#F5F5F7] p-1.5 rounded-full mt-4 max-w-full">
+  {tabs.map((tab) => (
+    <button
+      key={tab.value}
+      onClick={() => setActiveTab(tab.value)}
+      className={`px-6 py-2.5 text-sm font-bold cursor-pointer whitespace-nowrap rounded-full transition ${
+        activeTab === tab.value
+          ? "bg-white text-black shadow-md"
+          : "text-gray-500 hover:text-black"
+      }`}
+    >
+      {tab.label}
+    </button>
+  ))}
+</div>
+
         </div>
 
         
@@ -79,9 +83,9 @@ export default function ProductGrid() {
 
        
         <div className="mt-16 flex justify-center">
-          <button className="px-12 py-4 bg-[#F5F5F7] text-black rounded-full text-sm font-bold hover:bg-black hover:text-white transition shadow-sm cursor-pointer">
+          <Link to='/shop' className="px-12 py-4 bg-[#F5F5F7] text-black rounded-full text-sm font-bold hover:bg-black hover:text-white transition shadow-sm cursor-pointer">
             View All Collection
-          </button>
+          </Link>
         </div>
       </div>
     </section>

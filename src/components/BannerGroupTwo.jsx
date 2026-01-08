@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 const promoBanners = [
   {
     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-    link: "#",
+    link: "/shop",
   },
   {
     image: "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
-    link: "#",
+    link: "/shop",
   },
   {
     image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f",
-    link: "#",
+    link: "/shop",
   },
 ];
 
@@ -45,7 +45,7 @@ export default function BannerGroupTwo() {
 
            
             <div className="relative p-6 md:p-10 w-full flex justify-end">
-              <Link to='#' className="bg-white text-black px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 hover:bg-gray-200 transition-all duration-300 cursor-pointer">
+              <Link to={banner.link} className="bg-white text-black px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 hover:bg-gray-200 transition-all duration-300 cursor-pointer">
                 View More
                 <GoArrowRight className="text-lg" />
               </Link>

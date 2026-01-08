@@ -2,13 +2,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ProductCard from "./ProductCard";
-import { dealProducts } from "../data/products.js";
+
 
 import "swiper/css";
 import "swiper/css/navigation";
 import { Link } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
+import { useContext } from "react";
 
 export default function DealOfWeek() {
+   const { getDealProducts } = useContext(AppContext);
+
+  const dealProducts = getDealProducts();
   return (
     <section className="bg-white py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -27,7 +32,7 @@ export default function DealOfWeek() {
  
   <div className="flex items-center justify-between sm:justify-end gap-6">
    
-    <Link to="#"
+    <Link to="/shop"
   className="group inline-flex items-center cursor-pointer gap-2 text-sm md:text-base font-semibold text-black "
 >
   <span className="relative ">

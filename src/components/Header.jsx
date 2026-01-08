@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   HiChevronDown,
@@ -6,7 +6,9 @@ import {
   HiBars3,
   HiXMark,
 } from "react-icons/hi2";
-import { GoSearch, GoHeart, GoInbox } from "react-icons/go";
+import {  GoHeart, GoInbox } from "react-icons/go";
+import { AppContext } from "../context/AppContext";
+import Search from "./Search";
 
 export const navConfig = [
   { label: "Home", to: "/" },
@@ -86,6 +88,9 @@ export default function Header() {
   const [mobileOpenItem, setMobileOpenItem] = useState(null);
   const [mobileNestedOpen, setMobileNestedOpen] = useState(null);
   const [searchOpen, setSearchOpen] = useState(false);
+    const {getCartCount,toggleCart,toggleWishlist}=useContext(AppContext);
+    const cartCount = getCartCount();
+
   
   const [breakpoints, setBreakpoints] = useState({
     isSmallScreen: typeof window !== 'undefined' ? window.innerWidth < 640 : false,
@@ -135,7 +140,7 @@ export default function Header() {
     };
   }, [mobileMenuOpen, breakpoints.isMobileScreen]);
 
-  // Memoized render helper for nested items
+  // Memoized render helper
   const renderNestedItems = (items, isMobile = false) => {
     return items.map((item) => {
       if (item.nested) {
@@ -193,7 +198,7 @@ export default function Header() {
     });
   };
 
-  // Render mega menu content
+  // mega menu content
   const renderMegaMenu = (megaConfig, isMobile = false) => {
     return megaConfig.map((group) => (
       <div key={group.title}>
@@ -285,37 +290,19 @@ export default function Header() {
         {/* Right side icons */}
         <div className="flex items-center gap-5 grow lg:grow-0">
           {/* Search */}
-          <div className="relative grow w-full flex items-center justify-end gap-2">
-            <div
-              className={`transition-all duration-300 ${
-                searchOpen
-                  ? "w-full sm:max-w-[220px] opacity-100"
-                  : "w-0 opacity-0 pointer-events-none"
-              }`}
-            >
-              <input
-                autoFocus={searchOpen}
-                type="text"
-                placeholder="Search..."
-                className="w-full border border-[#ddd] rounded-full px-4 py-1.5 text-sm"
-              />
-            </div>
-            <button
-              className="cursor-pointer"
-              onClick={() => setSearchOpen((p) => !p)}
-            >
-              <GoSearch className="text-xl" />
-            </button>
-          </div>
+          <Search searchOpen={searchOpen} setSearchOpen={setSearchOpen}/>
 
-          <GoHeart className="hidden md:block text-xl cursor-pointer shrink-0" />
+          <GoHeart onClick={toggleWishlist} className="hidden md:block text-xl cursor-pointer shrink-0" />
 
           {!shouldHideLogo && (
-            <div className="relative text-xl cursor-pointer">
-              <GoInbox />
-              <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
-                0
+            <div  onClick={toggleCart} className="relative text-xl cursor-pointer">
+              <GoInbox  />
+              
+              {cartCount > 0 && (
+         <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
+                {cartCount}
               </span>
+        )}
             </div>
           )}
 
