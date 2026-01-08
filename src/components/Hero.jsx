@@ -3,13 +3,14 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
+import assets from "../assets/assets";
 
 const slides = [
-  "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-  "https://images.unsplash.com/photo-1503602642458-232111445657",
-  "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
-  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+  assets.banner1,
+  assets.banner2,
+  assets.banner3,
+  assets.banner4,
+  assets.banner5
 ];
 
 export default function Hero() {

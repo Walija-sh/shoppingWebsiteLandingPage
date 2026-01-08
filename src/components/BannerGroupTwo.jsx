@@ -1,17 +1,18 @@
 import { GoArrowRight } from "react-icons/go";
 import { Link } from "react-router-dom";
+import assets from "../assets/assets";
 
 const promoBanners = [
   {
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+    image: assets.watch1,
     link: "/shop",
   },
   {
-    image: "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
+    image:assets.shoes1,
     link: "/shop",
   },
   {
-    image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f",
+    image: assets.perfume,
     link: "/shop",
   },
 ];

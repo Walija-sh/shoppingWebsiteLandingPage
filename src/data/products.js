@@ -1,13 +1,11 @@
 // src/data/products.js
 
+import assets from "../assets/assets";
+
 export const products = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
-    images: [
-      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
-      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
-    ],
+    image: assets.camera1,
     title: "Premium Everyday Essential",
     category: "Electronics",
     price: 289,
@@ -23,10 +21,8 @@ export const products = [
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad",
-    images: [
-      "https://images.unsplash.com/photo-1585386959984-a4155224a1ad",
-    ],
+    image: assets.chair1,
+    
     title: "Comfort Fit Daily Use Item",
     category: "Furniture",
     price: 149,
@@ -41,10 +37,8 @@ export const products = [
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1503602642458-232111445657",
-    images: [
-      "https://images.unsplash.com/photo-1503602642458-232111445657",
-    ],
+    image: assets.chair2,
+    
     title: "Minimal Design Utility Product",
     category: "Furniture",
     price: 199,
@@ -60,10 +54,8 @@ export const products = [
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c",
-    images: [
-      "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c",
-    ],
+    image: assets.dress,
+    
     title: "Everyday Performance Gear",
     category: "Clothing",
     price: 129,
@@ -78,11 +70,8 @@ export const products = [
   },
   {
     id: 5,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
-    images: [
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
-      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa",
-    ],
+    image: assets.shoes1,
+   
     title: "Lightweight Daily Essential",
     category: "Footwear",
     price: 89,
@@ -98,10 +87,8 @@ export const products = [
   },
   {
     id: 6,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-    images: [
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-    ],
+    image: assets.headphone1,
+    
     title: "Modern Lifestyle Accessory",
     category: "Accessories",
     price: 179,
@@ -116,10 +103,8 @@ export const products = [
   },
   {
     id: 7,
-    image: "https://images.unsplash.com/photo-1519744792095-2f2205e87b6f",
-    images: [
-      "https://images.unsplash.com/photo-1519744792095-2f2205e87b6f",
-    ],
+    image: assets.dress,
+    
     title: "Durable Everyday Companion",
     category: "Clothing",
     price: 219,
@@ -135,10 +120,8 @@ export const products = [
   },
   {
     id: 8,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
-    images: [
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
-    ],
+    image: assets.headphone2,
+   
     title: "High-Quality Daily Essential",
     category: "Electronics",
     price: 99,
@@ -153,10 +136,8 @@ export const products = [
   },
   {
     id: 9,
-    image: "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7",
-    images: [
-      "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7",
-    ],
+    image: assets.watch2,
+    
     title: "Compact Performance Product",
     category: "Electronics",
     price: 159,
@@ -172,10 +153,8 @@ export const products = [
   },
   {
     id: 10,
-    image: "https://images.unsplash.com/photo-1503602642458-232111445657",
-    images: [
-      "https://images.unsplash.com/photo-1503602642458-232111445657",
-    ],
+    image: assets.chair2,
+    
     title: "Essential Utility Upgrade",
     category: "Furniture",
     price: 249,
@@ -190,10 +169,8 @@ export const products = [
   },
   {
     id: 11,
-    image: "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
-    images: [
-      "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
-    ],
+    image: assets.shoes3,
+    
     title: "Reliable Everyday Solution",
     category: "Footwear",
     price: 119,
@@ -209,10 +186,8 @@ export const products = [
   },
   {
     id: 12,
-    image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
-    images: [
-      "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
-    ],
+    image: assets.tv,
+    
     title: "Premium Multi-Purpose Item",
     category: "Electronics",
     price: 329,

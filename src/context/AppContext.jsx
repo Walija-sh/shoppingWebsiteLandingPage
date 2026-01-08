@@ -54,7 +54,7 @@ const AppProvider = ({ children }) => {
       return [...prev, { productId, quantity, selectedSize }];
     });
 
-    toggleCart()
+    
   };
 
   const removeFromCart = ({ productId, selectedSize }) => {
@@ -114,7 +114,7 @@ const AppProvider = ({ children }) => {
       if (prev.includes(productId)) return prev; // already in wishlist
       return [...prev, productId];
     });
-    setIsWishlistOpen(true); 
+    
   };
   const removeFromWishlist = (productId) => {
     setWishlist((prev) => prev.filter((id) => id !== productId));
