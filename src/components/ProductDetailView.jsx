@@ -35,6 +35,7 @@ const handleAddToCart = () => {
   const {
     id,
     image,
+    images,
     title,
     price,
     originalPrice,
@@ -47,6 +48,8 @@ const handleAddToCart = () => {
     isNew,
   } = product;
   const isInWishlist = wishlist.includes(id);
+  const [mainImage, setMainImage] = useState(images?.[0] || image);
+
 
   return (
     <div className="bg-white">
@@ -62,12 +65,14 @@ const handleAddToCart = () => {
            </div>
      
            <div className="max-w-7xl mx-auto px-6 pb-20">
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+             <div className="grid grid-cols-1 md:grid-cols-2 md:items-start gap-12 lg:gap-16">
                
                {/* Section 1 */}
-               <div className="relative bg-[#F5F5F7] rounded-[40px] overflow-hidden flex items-center justify-center">
+               <div className=" grid   ">
+
+               <div className="relative bg-[#F5F5F7] rounded-[40px] overflow-hidden flex items-center justify-center ">
                  <img
-                   src={image}
+                   src={mainImage}
                    alt={title}
                    className="w-full h-full object-cover object-center  transition-transform duration-700 hover:scale-105"
                  />
@@ -100,6 +105,27 @@ const handleAddToCart = () => {
   )}
 </button>
                </div>
+               {images && images.length > 1 && (
+  <div className="flex gap-3 mt-4 justify-center">
+    {images.map((img, idx) => (
+      <div
+        key={idx}
+        onClick={() => setMainImage(img)}
+        className={` rounded-lg overflow-hidden cursor-pointer  transition-all `}
+      >
+        <img
+          src={img}
+          alt={`${title} thumbnail ${idx + 1}`}
+          className="w-full h-full object-cover object-center hover:scale-110 transition-transform duration-300"
+        />
+      </div>
+    ))}
+  </div>
+)}
+
+
+               </div>
+               
      
                {/* Section 2*/}
                <div className="flex flex-col">

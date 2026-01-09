@@ -6,6 +6,9 @@ export const products = [
   {
     id: 1,
     image: assets.camera1,
+    images:[
+       assets.camera1, assets.camera1
+    ],
     title: "Premium Everyday Essential",
     category: "Electronics",
     price: 289,
@@ -22,7 +25,9 @@ export const products = [
   {
     id: 2,
     image: assets.chair1,
-    
+    images:[
+       assets.chair1, assets.chair1
+    ],
     title: "Comfort Fit Daily Use Item",
     category: "Furniture",
     price: 149,
@@ -38,7 +43,9 @@ export const products = [
   {
     id: 3,
     image: assets.chair2,
-    
+    images:[
+       assets.chair2, assets.chair2,assets.chair2
+    ],
     title: "Minimal Design Utility Product",
     category: "Furniture",
     price: 199,
@@ -55,7 +62,9 @@ export const products = [
   {
     id: 4,
     image: assets.dress,
-    
+    images:[
+       assets.dress, assets.dress
+    ],
     title: "Everyday Performance Gear",
     category: "Clothing",
     price: 129,
@@ -71,7 +80,9 @@ export const products = [
   {
     id: 5,
     image: assets.shoes1,
-   
+   images:[
+       assets.shoes1, assets.shoes1,assets.shoes1
+    ],
     title: "Lightweight Daily Essential",
     category: "Footwear",
     price: 89,
@@ -88,7 +99,9 @@ export const products = [
   {
     id: 6,
     image: assets.headphone1,
-    
+     images:[
+       assets.headphone1, assets.headphone1
+    ],
     title: "Modern Lifestyle Accessory",
     category: "Accessories",
     price: 179,
@@ -104,7 +117,9 @@ export const products = [
   {
     id: 7,
     image: assets.dress,
-    
+     images:[
+       assets.dress, assets.dress,assets.dress
+    ],
     title: "Durable Everyday Companion",
     category: "Clothing",
     price: 219,
@@ -121,7 +136,9 @@ export const products = [
   {
     id: 8,
     image: assets.headphone2,
-   
+    images:[
+       assets.headphone2, assets.headphone2,assets.headphone2
+    ],
     title: "High-Quality Daily Essential",
     category: "Electronics",
     price: 99,
@@ -137,7 +154,9 @@ export const products = [
   {
     id: 9,
     image: assets.watch2,
-    
+     images:[
+       assets.watch2, assets.watch2
+    ],
     title: "Compact Performance Product",
     category: "Electronics",
     price: 159,
@@ -154,7 +173,9 @@ export const products = [
   {
     id: 10,
     image: assets.chair2,
-    
+     images:[
+       assets.chair2, assets.chair2
+    ],
     title: "Essential Utility Upgrade",
     category: "Furniture",
     price: 249,
@@ -170,7 +191,9 @@ export const products = [
   {
     id: 11,
     image: assets.shoes3,
-    
+     images:[
+       assets.shoes3, assets.shoes3
+    ],
     title: "Reliable Everyday Solution",
     category: "Footwear",
     price: 119,
@@ -187,7 +210,9 @@ export const products = [
   {
     id: 12,
     image: assets.tv,
-    
+     images:[
+       assets.tv, assets.tv,assets.tv
+    ],
     title: "Premium Multi-Purpose Item",
     category: "Electronics",
     price: 329,
