@@ -88,8 +88,9 @@ export default function Header() {
   const [mobileOpenItem, setMobileOpenItem] = useState(null);
   const [mobileNestedOpen, setMobileNestedOpen] = useState(null);
   const [searchOpen, setSearchOpen] = useState(false);
-    const {getCartCount,toggleCart,toggleWishlist}=useContext(AppContext);
+    const {getCartCount,toggleCart,toggleWishlist,getWishlistCount}=useContext(AppContext);
     const cartCount = getCartCount();
+    const wishlistCount=getWishlistCount();
 
   
   const [breakpoints, setBreakpoints] = useState({
@@ -292,7 +293,16 @@ export default function Header() {
           {/* Search */}
           <Search searchOpen={searchOpen} setSearchOpen={setSearchOpen}/>
 
-          <GoHeart onClick={toggleWishlist} className="hidden md:block text-xl cursor-pointer shrink-0" />
+   <div  onClick={toggleWishlist} className="relative text-xl cursor-pointer shrink-0">
+              <GoHeart  />
+              
+              {wishlistCount > 0 && (
+         <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
+                {wishlistCount}
+              </span>
+        )}
+            </div>
+          
 
           {!shouldHideLogo && (
             <div  onClick={toggleCart} className="relative text-xl cursor-pointer">

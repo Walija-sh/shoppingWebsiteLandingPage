@@ -121,7 +121,7 @@ const AppProvider = ({ children }) => {
   };
   const getWishlistItems = () =>
     wishlist.map((id) => getProductDetail(id));
-
+const getWishlistCount = () => wishlist.length;
   /* ===================== CONTEXT VALUE ===================== */
   const value = {
     // products
@@ -150,6 +150,7 @@ const AppProvider = ({ children }) => {
     addToWishlist,
     removeFromWishlist,
     getWishlistItems,
+    getWishlistCount,
   };
 
   return (

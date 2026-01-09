@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { Link } from "react-router-dom";
@@ -12,18 +12,27 @@ export default function ProductCard({
   originalPrice,
   isOnSale,
   isNew,
-  sizes
+  sizes,
+  list = false, // new optional prop, default false
 }) {
-  
   const { addToCart, wishlist, addToWishlist, removeFromWishlist } = useContext(AppContext);
 
-const isInWishlist = wishlist.includes(id);
+  const isInWishlist = wishlist.includes(id);
+
+  // Card layout classes based on list mode
+  const containerClass = list
+    ? "group flex bg-white rounded-[32px] p-4 border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300 gap-4"
+    : "group bg-white rounded-[32px] p-3 border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300";
+
+  const imageContainerClass = list
+    ? "relative w-32 aspect-square rounded-[24px] bg-[#F5F5F7] overflow-hidden flex items-center justify-center"
+    : "relative aspect-square rounded-[24px] bg-[#F5F5F7] overflow-hidden mb-4 flex items-center justify-center";
+
+  const contentWrapperClass = list ? "flex-1 flex flex-col justify-between" : "px-2 pb-2";
 
   return (
-    <div className="group bg-white rounded-[32px] p-3 border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
-      
-      
-      <div className="relative aspect-square rounded-[24px] bg-[#F5F5F7] overflow-hidden mb-4 flex items-center justify-center">
+    <div className={containerClass}>
+      <div className={imageContainerClass}>
         <img
           src={image}
           alt={title}
@@ -44,57 +53,70 @@ const isInWishlist = wishlist.includes(id);
           )}
         </div>
 
-        
-      
+        {/* Wishlist Button */}
         <button
-  onClick={() =>
-    isInWishlist ? removeFromWishlist(id) : addToWishlist(id)
-  }
-  className="absolute top-3 right-3 z-30 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm  transition-all duration-300 cursor-pointer"
->
-  {isInWishlist ? (
-    <GoHeartFill className="text-xl text-[#E11D48]" />
-  ) : (
-    <GoHeart className="text-xl text-black" />
-  )}
-</button>
+          onClick={() => (isInWishlist ? removeFromWishlist(id) : addToWishlist(id))}
+          className="absolute top-3 right-3 z-30 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm transition-all duration-300 cursor-pointer"
+        >
+          {isInWishlist ? (
+            <GoHeartFill className="text-xl text-[#E11D48]" />
+          ) : (
+            <GoHeart className="text-xl text-black" />
+          )}
+        </button>
 
-        
-        <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/5 backdrop-blur-[2px] transition-all duration-300 pointer-events-none">
-          
-          
-          <button onClick={() =>
-  addToCart({
-    productId: id,
-    quantity: 1,
-    selectedSize: sizes[0],
-  })
-}
- className="pointer-events-auto bg-white text-black px-6 py-3 rounded-full flex items-center gap-2 text-sm font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 cursor-pointer">
-            <HiOutlineShoppingBag className="text-lg" />
-            Add to Bag
-          </button>
-        </div>
+        {/* Add to Bag overlay */}
+        {!list && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/5 backdrop-blur-[2px] transition-all duration-300 pointer-events-none">
+            <button
+              onClick={() =>
+                addToCart({
+                  productId: id,
+                  quantity: 1,
+                  selectedSize: sizes[0],
+                })
+              }
+              className="pointer-events-auto bg-white text-black px-6 py-3 rounded-full flex items-center gap-2 text-sm font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 cursor-pointer"
+            >
+              <HiOutlineShoppingBag className="text-lg" />
+              Add to Bag
+            </button>
+          </div>
+        )}
       </div>
 
-    
-      <div className="px-2 pb-2">
+      {/* Content */}
+      <div className={contentWrapperClass}>
         <Link to={`/product/${id}`}>
-
-        <h3 className="text-[15px] font-semibold text-gray-900 line-clamp-1 mb-1">
-          {title}
-        </h3>
+          <h3 className="text-[15px] font-semibold text-gray-900 line-clamp-1 mb-1">
+            {title}
+          </h3>
         </Link>
         <div className="flex items-center gap-2">
-          <span className="text-lg font-bold text-black">
-            ${price.toFixed(2)}
-          </span>
+          <span className="text-lg font-bold text-black">${price.toFixed(2)}</span>
           {originalPrice && (
             <span className="text-sm font-medium line-through text-gray-400">
               ${originalPrice.toFixed(2)}
             </span>
           )}
         </div>
+
+        {/* Add to Bag button for list layout */}
+        {list && (
+          <button
+            onClick={() =>
+              addToCart({
+                productId: id,
+                quantity: 1,
+                selectedSize: sizes[0],
+              })
+            }
+            className="mt-3 bg-black text-white px-4 py-2 rounded-full flex items-center gap-2 text-sm font-bold shadow-lg w-fit cursor-pointer"
+          >
+            <HiOutlineShoppingBag className="text-lg" />
+            Add to Bag
+          </button>
+        )}
       </div>
     </div>
   );

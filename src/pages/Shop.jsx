@@ -1,7 +1,8 @@
 import { useContext, useMemo, useState, useRef, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 import ProductCard from "../components/ProductCard";
-import { HiOutlineAdjustmentsHorizontal, HiChevronDown, HiCheck } from "react-icons/hi2";
+import { HiOutlineAdjustmentsHorizontal, HiChevronDown, HiCheck,HiOutlineSquares2X2, HiOutlineBars4 } from "react-icons/hi2";
+
 
 const Shop = () => {
   const { products } = useContext(AppContext);
@@ -10,6 +11,7 @@ const Shop = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sort, setSort] = useState("default");
+  const [layout, setLayout] = useState("grid"); 
 
   // DRAFT FILTER VALUES
   const [draftCategory, setDraftCategory] = useState("all");
@@ -287,10 +289,13 @@ const Shop = () => {
           {/* PRODUCTS SECTION */}
           <section>
             {/* Mobile Filter Button */}
-            <div className="flex justify-between items-center mb-6 lg:hidden relative">
-              <p className="text-sm text-gray-500">
+            <div className="grid gap-2 mb-6 lg:hidden relative">
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-gray-500">
                 {filteredProducts.length} products
               </p>
+
+
 
               {/* Filter Icon Button */}
               <div className="relative ">
@@ -419,21 +424,54 @@ const Shop = () => {
                 </div>
               )}
               </div>
+              </div>
 
-              {/* MOBILE FILTERS PANEL */}
+             <button
+  onClick={() => setLayout(layout === "grid" ? "list" : "grid")}
+  className="ml-auto flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-gray-100 transition-colors shadow-sm cursor-pointer"
+>
+  {layout === "grid" ? (
+    <>
+      <HiOutlineBars4 className="text-xl text-gray-700" />
+      <span className="text-sm text-gray-700">Switch to List View</span>
+    </>
+  ) : (
+    <>
+      <HiOutlineSquares2X2 className="text-xl text-gray-700" />
+      <span className="text-sm text-gray-700">Switch to Grid View</span>
+    </>
+  )}
+</button>
              
             </div>
 
             {/* Desktop results count */}
-            <p className="hidden lg:block text-sm text-gray-500 mb-8">
-              Showing {filteredProducts.length} results
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12">
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.id} {...product} />
-              ))}
+            <div className="hidden lg:flex items-center justify-between mb-8">
+              <p className="text-sm text-gray-500 ">Showing {filteredProducts.length} results</p>
+              <button
+  onClick={() => setLayout(layout === "grid" ? "list" : "grid")}
+  className="ml-auto flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-gray-100 transition-colors shadow-sm cursor-pointer"
+>
+  {layout === "grid" ? (
+    <>
+      <HiOutlineBars4 className="text-xl text-gray-700" />
+      <span className="text-sm text-gray-700">Switch to List View</span>
+    </>
+  ) : (
+    <>
+      <HiOutlineSquares2X2 className="text-xl text-gray-700" />
+      <span className="text-sm text-gray-700">Switch to Grid View</span>
+    </>
+  )}
+</button>
             </div>
+
+           <div className={layout === "grid" ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12" : "flex flex-col gap-6"}>
+  {filteredProducts.map((product) => (
+    <ProductCard key={product.id} {...product} list={layout === "list"} />
+  ))}
+</div>
+
           </section>
 
         </div>
