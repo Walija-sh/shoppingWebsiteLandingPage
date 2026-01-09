@@ -302,7 +302,7 @@ const Shop = () => {
     onClick={() => setLayout("grid")}
     className={`p-1.5 rounded-full transition-all cursor-pointer ${
       layout === "grid" 
-        ? "bg-white shadow-sm text-black" 
+        ? "bg-white shadow-sm text-black border " 
         : "text-gray-500 hover:text-gray-700"
     }`}
     title="Grid View"
@@ -314,7 +314,7 @@ const Shop = () => {
     onClick={() => setLayout("list")}
     className={`p-1.5 rounded-full transition-all cursor-pointer ${
       layout === "list" 
-        ? "bg-white shadow-sm text-black" 
+        ? "bg-white shadow-sm text-black border" 
         : "text-gray-500 hover:text-gray-700"
     }`}
     title="List View"
@@ -464,7 +464,7 @@ const Shop = () => {
     onClick={() => setLayout("grid")}
     className={`p-1.5 rounded-full transition-all cursor-pointer ${
       layout === "grid" 
-        ? "bg-white shadow-sm text-black" 
+        ? "bg-white shadow-sm text-black border" 
         : "text-gray-500 hover:text-gray-700"
     }`}
     title="Grid View"
@@ -476,7 +476,7 @@ const Shop = () => {
     onClick={() => setLayout("list")}
     className={`p-1.5 rounded-full transition-all cursor-pointer ${
       layout === "list" 
-        ? "bg-white shadow-sm text-black" 
+        ? "bg-white shadow-sm text-black border" 
         : "text-gray-500 hover:text-gray-700"
     }`}
     title="List View"
