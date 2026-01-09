@@ -50,7 +50,7 @@ const isInWishlist = wishlist.includes(id);
   onClick={() =>
     isInWishlist ? removeFromWishlist(id) : addToWishlist(id)
   }
-  className="absolute top-3 right-3 z-30 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer"
+  className="absolute top-3 right-3 z-30 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm  transition-all duration-300 cursor-pointer"
 >
   {isInWishlist ? (
     <GoHeartFill className="text-xl text-[#E11D48]" />

@@ -80,7 +80,7 @@ export default function DealOfWeek() {
             className="!overflow-visible"
           >
             {dealProducts.map((product) => (
-              <SwiperSlide key={product.title}>
+              <SwiperSlide key={product.title} className="pb-3">
                 <ProductCard {...product} />
               </SwiperSlide>
             ))}
