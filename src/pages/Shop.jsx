@@ -290,13 +290,38 @@ const Shop = () => {
           <section>
             {/* Mobile Filter Button */}
             <div className="grid gap-2 mb-6 lg:hidden relative">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between flex-wrap">
                 <p className="text-sm text-gray-500">
                 {filteredProducts.length} products
               </p>
 
 
-
+<div className="flex gap-2 items-center">
+<div className="flex items-center p-1 bg-gray-100/80 rounded-full ml-auto">
+  <button
+    onClick={() => setLayout("grid")}
+    className={`p-1.5 rounded-full transition-all cursor-pointer ${
+      layout === "grid" 
+        ? "bg-white shadow-sm text-black" 
+        : "text-gray-500 hover:text-gray-700"
+    }`}
+    title="Grid View"
+  >
+    <HiOutlineSquares2X2 className="text-lg" />
+  </button>
+  
+  <button
+    onClick={() => setLayout("list")}
+    className={`p-1.5 rounded-full transition-all cursor-pointer ${
+      layout === "list" 
+        ? "bg-white shadow-sm text-black" 
+        : "text-gray-500 hover:text-gray-700"
+    }`}
+    title="List View"
+  >
+    <HiOutlineBars4 className="text-lg" />
+  </button>
+</div>
               {/* Filter Icon Button */}
               <div className="relative ">
 
@@ -424,46 +449,41 @@ const Shop = () => {
                 </div>
               )}
               </div>
+</div>
               </div>
 
-             <button
-  onClick={() => setLayout(layout === "grid" ? "list" : "grid")}
-  className="ml-auto flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-gray-100 transition-colors shadow-sm cursor-pointer"
->
-  {layout === "grid" ? (
-    <>
-      <HiOutlineBars4 className="text-xl text-gray-700" />
-      <span className="text-sm text-gray-700">Switch to List View</span>
-    </>
-  ) : (
-    <>
-      <HiOutlineSquares2X2 className="text-xl text-gray-700" />
-      <span className="text-sm text-gray-700">Switch to Grid View</span>
-    </>
-  )}
-</button>
+
              
             </div>
 
             {/* Desktop results count */}
             <div className="hidden lg:flex items-center justify-between mb-8">
               <p className="text-sm text-gray-500 ">Showing {filteredProducts.length} results</p>
-              <button
-  onClick={() => setLayout(layout === "grid" ? "list" : "grid")}
-  className="ml-auto flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-gray-100 transition-colors shadow-sm cursor-pointer"
->
-  {layout === "grid" ? (
-    <>
-      <HiOutlineBars4 className="text-xl text-gray-700" />
-      <span className="text-sm text-gray-700">Switch to List View</span>
-    </>
-  ) : (
-    <>
-      <HiOutlineSquares2X2 className="text-xl text-gray-700" />
-      <span className="text-sm text-gray-700">Switch to Grid View</span>
-    </>
-  )}
-</button>
+<div className="flex items-center p-1 bg-gray-100/80 rounded-full ml-auto">
+  <button
+    onClick={() => setLayout("grid")}
+    className={`p-1.5 rounded-full transition-all cursor-pointer ${
+      layout === "grid" 
+        ? "bg-white shadow-sm text-black" 
+        : "text-gray-500 hover:text-gray-700"
+    }`}
+    title="Grid View"
+  >
+    <HiOutlineSquares2X2 className="text-lg" />
+  </button>
+  
+  <button
+    onClick={() => setLayout("list")}
+    className={`p-1.5 rounded-full transition-all cursor-pointer ${
+      layout === "list" 
+        ? "bg-white shadow-sm text-black" 
+        : "text-gray-500 hover:text-gray-700"
+    }`}
+    title="List View"
+  >
+    <HiOutlineBars4 className="text-lg" />
+  </button>
+</div>
             </div>
 
            <div className={layout === "grid" ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12" : "flex flex-col gap-6"}>
