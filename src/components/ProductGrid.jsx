@@ -74,7 +74,7 @@ export default function ProductGrid() {
   className="product-swiper"
 >
   {filteredProducts.map((product) => (
-    <SwiperSlide key={product.title} className="pb-3">
+    <SwiperSlide key={product.title} className="pb-4 overflow-visible">
       <ProductCard {...product} />
     </SwiperSlide>
   ))}

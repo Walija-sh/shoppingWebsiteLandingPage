@@ -13,7 +13,7 @@ export default function ProductCard({
   isOnSale,
   isNew,
   sizes,
-  list = false, // new optional prop, default false
+  list = false, 
 }) {
   const { addToCart, wishlist, addToWishlist, removeFromWishlist } = useContext(AppContext);
 
@@ -31,7 +31,7 @@ export default function ProductCard({
   const contentWrapperClass = list ? "flex-1 flex flex-col justify-between" : "px-2 pb-2";
 
   return (
-    <div className={containerClass}>
+    <div className={`${containerClass} mb-4`}>
       <div className={imageContainerClass}>
         <img
           src={image}

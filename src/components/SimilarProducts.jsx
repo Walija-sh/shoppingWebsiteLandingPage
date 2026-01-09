@@ -34,10 +34,10 @@ const shouldLoop = products.length > MAX_SLIDES;
               slidesPerView: 4,
             },
           }}
-          className="product-swiper"
+          className="product-swiper "
         >
           {products.map((product) => (
-            <SwiperSlide key={product.title}>
+            <SwiperSlide key={product.title} className="overflow-visible pb-4">
               <ProductCard {...product} />
             </SwiperSlide>
           ))}
