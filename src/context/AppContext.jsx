@@ -122,6 +122,12 @@ const AppProvider = ({ children }) => {
   const getWishlistItems = () =>
     wishlist.map((id) => getProductDetail(id));
 const getWishlistCount = () => wishlist.length;
+/* ===================== FILTER OPTIONS ===================== */
+const getUniqueSizes = [...new Set(products.flatMap(p => p.sizes))].sort(); 
+
+const getUniqueColors = [...new Set(products.flatMap(p => p.colors))]; 
+
+const getUniqueTags = [...new Set(products.flatMap(p => p.tags))].sort(); 
   /* ===================== CONTEXT VALUE ===================== */
   const value = {
     // products
@@ -151,6 +157,10 @@ const getWishlistCount = () => wishlist.length;
     removeFromWishlist,
     getWishlistItems,
     getWishlistCount,
+    // filters
+    getUniqueColors,
+    getUniqueSizes,
+    getUniqueTags
   };
 
   return (

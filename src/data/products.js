@@ -15,7 +15,7 @@ export const products = [
     originalPriceLBP: 37380000,
     description: "Capture life's best moments with this premium everyday camera. Built for versatility and ease of use, it delivers stunning clarity in a retro-inspired design.",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["#000000", "#C0C0C0", "#4A4A4A"], // Black, Silver, Gray
+    colors: ["#000000", "#C0C0C0", "#333333"], // Black, Silver, Gray
     tags: ["photography", "gadget", "professional"],
     isOnSale: true,
     isNew: false,
@@ -33,7 +33,7 @@ export const products = [
     originalPriceLBP: 13261000,
     description: "Experience the perfect balance of minimalism and comfort. This utility stool is crafted from high-quality materials to provide durable seating for any room.",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["#8B4513", "#D2B48C", "#FFFFFF"], // Brown, Tan, White
+    colors: ["#8B4513", "#FFFFFF"], // Brown, White
     tags: ["home", "minimalist", "interior"],
     isOnSale: false,
     isNew: true,
@@ -52,7 +52,7 @@ export const products = [
     originalPriceLBP: 24831000,
     description: "A masterclass in industrial design, this product combines functionality with aesthetic appeal.",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["#2C3E50", "#7F8C8D"], // Midnight Blue, Grey
+    colors: ["#2C3E50", "#333333"], // Midnight Blue, Grey
     tags: ["office", "modern", "sturdy"],
     isOnSale: true,
     isNew: false,
@@ -70,7 +70,7 @@ export const products = [
     originalPriceLBP: 11481000,
     description: "Designed for the active individual, this gear offers breathable fabric and a flexible fit. Perfect for workouts or casual outings.",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["#FF5733", "#000000", "#2E86C1"], // Orange, Black, Blue
+    colors: ["#000000", "#9B59B6"],
     tags: ["activewear", "performance", "breathable"],
     isOnSale: false,
     isNew: false,
@@ -126,7 +126,7 @@ export const products = [
     originalPriceLBP: 26611000,
     description: "Rugged yet refined, this shirt is built to last. Made from premium cotton, it offers a relaxed fit.",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["#1D8348", "#FBFCFC"], // Green, White
+    colors: ["#000000", "#FFFFFF"], // Black, White
     tags: ["casual", "cotton", "durable"],
     isOnSale: true,
     isNew: false,
@@ -163,7 +163,7 @@ export const products = [
     originalPriceLBP: 17711000,
     description: "Sleek, powerful, and portable. This compact device packs a punch with high-speed performance.",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["#5D6D7E", "#212F3D"], // Slate, Charcoal
+    colors: ["#F39C12", "#34495E"], 
     tags: ["productivity", "compact", "tech"],
     isOnSale: true,
     isNew: false,
@@ -181,7 +181,7 @@ export const products = [
     originalPriceLBP: 22161000,
     description: "Upgrade your living space with this essential utility piece. Clean lines and functional design.",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["#F4F6F7", "#B2BABB"], // Light Grey, Silver
+    colors: ["#F39C12", "#34495E"],
     tags: ["decor", "upgrade", "living-room"],
     isOnSale: false,
     isNew: true,

@@ -6,7 +6,18 @@ import { HiOutlineAdjustmentsHorizontal, HiOutlineSquares2X2, HiOutlineBars4 } f
 
 const Shop = () => {
   const { products } = useContext(AppContext);
+const MIN_PRICE = 0;
+const MAX_PRICE = 2000;
 
+const defaultFilters = {
+  category: "all",
+  minPrice: MIN_PRICE,
+  maxPrice: MAX_PRICE,
+  sizes: [],
+  colors: [],
+  tag: "",
+  sort: "default"
+};
   const [filters, setFilters] = useState({
     category: "all",
     minPrice: "",
@@ -47,6 +58,12 @@ const Shop = () => {
     setFilters(draftFilters);
     setShowFilters(false);
   };
+ 
+  const handleClearFilters = () => {
+  setDraftFilters(defaultFilters);
+  setFilters(defaultFilters);
+};
+
 
   const handleCancelFilters = () => {
     setDraftFilters(filters);
@@ -62,22 +79,44 @@ const Shop = () => {
 
   // FILTERING LOGIC
   const filteredProducts = useMemo(() => {
-    let result = [...products];
+  let result = [...products];
 
-    if (filters.category !== "all") {
-      result = result.filter((p) => p.category === filters.category);
-    }
+  // 1. Category
+  if (filters.category !== "all") {
+    result = result.filter((p) => p.category === filters.category);
+  }
 
-    if (filters.minPrice) result = result.filter((p) => p.price >= Number(filters.minPrice));
-    if (filters.maxPrice) result = result.filter((p) => p.price <= Number(filters.maxPrice));
+  // 2. Price Range
+  if (filters.minPrice) result = result.filter((p) => p.price >= Number(filters.minPrice));
+  if (filters.maxPrice) result = result.filter((p) => p.price <= Number(filters.maxPrice));
 
-    if (filters.sort === "price-low") result.sort((a, b) => a.price - b.price);
-    if (filters.sort === "price-high") result.sort((a, b) => b.price - a.price);
-    if (filters.sort === "name-az") result.sort((a, b) => a.title.localeCompare(b.title));
-    if (filters.sort === "name-za") result.sort((a, b) => b.title.localeCompare(a.title));
+  // 3. Sizes (Check if product has ANY of the selected sizes)
+  if (filters.sizes && filters.sizes.length > 0) {
+    result = result.filter((p) => 
+      p.sizes.some(size => filters.sizes.includes(size))
+    );
+  }
 
-    return result;
-  }, [products, filters]);
+  // 4. Colors (Check if product has ANY of the selected colors)
+  if (filters.colors && filters.colors.length > 0) {
+    result = result.filter((p) => 
+      p.colors.some(color => filters.colors.includes(color))
+    );
+  }
+
+  // 5. Tags (Check if product contains the specific selected tag)
+  if (filters.tag) {
+    result = result.filter((p) => p.tags.includes(filters.tag));
+  }
+
+  // 6. Sorting
+  if (filters.sort === "price-low") result.sort((a, b) => a.price - b.price);
+  else if (filters.sort === "price-high") result.sort((a, b) => b.price - a.price);
+  else if (filters.sort === "name-az") result.sort((a, b) => a.title.localeCompare(b.title));
+  else if (filters.sort === "name-za") result.sort((a, b) => b.title.localeCompare(a.title));
+
+  return result;
+}, [products, filters]);
 
   return (
     <div className="bg-white min-h-screen">
@@ -100,6 +139,7 @@ const Shop = () => {
               showFilters={true}
               onClose={handleCancelFilters}
               onApply={handleApplyFilters}
+              onClear={handleClearFilters}
               draftValues={draftFilters}
               onDraftChange={handleDraftChange}
             />
@@ -171,6 +211,7 @@ const Shop = () => {
           showFilters={showFilters}
           onClose={handleCancelFilters}
           onApply={handleApplyFilters}
+            onClear={handleClearFilters}
           draftValues={draftFilters}
           onDraftChange={handleDraftChange}
         />
