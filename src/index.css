@@ -18,3 +18,42 @@
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
+
+        /* filter range */
+        /* Custom styling for the range slider thumbs */
+.range-input {
+  appearance: none;
+  -webkit-appearance: none;
+  pointer-events: none;
+}
+
+/* For Chrome, Safari, and Edge */
+.range-input::-webkit-slider-thumb {
+  pointer-events: auto; 
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid black;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.1s ease;
+}
+
+.range-input::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  background: #f9f9f9;
+}
+
+/* For Firefox */
+.range-input::-moz-range-thumb {
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid black;
+  cursor: pointer;
+}
