@@ -9,6 +9,7 @@ import { GoHeart, GoHeartFill } from "react-icons/go";
 import { FaFacebookF, FaWhatsapp, FaRegEnvelope } from "react-icons/fa";
 import { FiLink } from "react-icons/fi";
 import { AppContext } from "../context/AppContext";
+import ZoomableImage from "./ZoomableImage";
 
 const ProductDetailView = ({ product }) => {
   
@@ -70,12 +71,9 @@ const handleAddToCart = () => {
                {/* Section 1 */}
                <div className=" grid   ">
 
-               <div className="relative bg-[#F5F5F7] rounded-[40px] overflow-hidden flex items-center justify-center ">
-                 <img
-                   src={mainImage}
-                   alt={title}
-                   className="w-full h-full object-cover object-center  transition-transform duration-700 hover:scale-105"
-                 />
+               <div className="relative bg-[#F5F5F7] rounded-[40px] overflow-hidden flex items-center justify-center aspect-square ">
+                 <ZoomableImage src={mainImage} alt={title} />
+
                  
                  {/* Minimalist Badges */}
                  <div className="absolute top-8 left-8 flex flex-col gap-2">
@@ -111,7 +109,7 @@ const handleAddToCart = () => {
       <div
         key={idx}
         onClick={() => setMainImage(img)}
-        className={` rounded-lg overflow-hidden cursor-pointer  transition-all `}
+        className={` rounded-lg overflow-hidden cursor-pointer aspect-square transition-all `}
       >
         <img
           src={img}

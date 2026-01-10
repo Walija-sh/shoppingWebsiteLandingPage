@@ -9,8 +9,6 @@ const WishlistModal = () => {
     isWishlistOpen,
     toggleWishlist,
     getWishlistItems,
-    addToCart,
-    removeFromWishlist,
   } = useContext(AppContext);
 
   const items = getWishlistItems();
@@ -66,15 +64,12 @@ const WishlistModal = () => {
                   <p className="font-bold text-sm text-black mb-2">
                     ${item.price.toFixed(2)}
                   </p>
-                  <button
-                    onClick={() => {
-                      addToCart({ productId: item.id, quantity: 1, selectedSize: item.sizes?.[0] });
-                      removeFromWishlist(item.id);
-                    }}
+                  <Link to={`/product/${item.id}`}
+                    
                     className="bg-black text-white px-4 py-2 rounded-full text-xs font-semibold cursor-pointer transition"
                   >
-                    Add to Cart
-                  </button>
+                    View Product
+                  </Link>
                 </div>
               </div>
             ))

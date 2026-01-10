@@ -17,6 +17,9 @@ import tv from './tv.jpg'
 import watch1 from './watch1.jpg'
 import watch2 from './watch2.jpg'
 import dress from './dress.jpg'
+import dress2 from './dress2.jpg'
+import dress3 from './dress3.jpg'
+import logo from './logo.svg';
 
 const assets={
     banner1,banner2,banner3,banner4,banner5,
@@ -25,7 +28,8 @@ const assets={
     headphone1,headphone2,
     perfume,tv,
     shoes1,shoes2,shoes3,
-    watch1,watch2,dress
+    watch1,watch2,dress,dress2,dress3
+    ,logo,
 }
 
 export default assets;

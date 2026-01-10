@@ -6,17 +6,17 @@ export const products = [
   {
     id: 1,
     image: assets.camera1,
-    images:[
-       assets.camera1, assets.camera1
-    ],
+    images: [assets.camera1, assets.camera2],
     title: "Premium Everyday Essential",
     category: "Electronics",
     price: 289,
     originalPrice: 420,
     priceLBP: 25721000,
     originalPriceLBP: 37380000,
-    description: "Capture life's best moments with this premium everyday camera. Built for versatility and ease of use, it delivers stunning clarity in a retro-inspired design. Whether you are a professional or a hobbyist, this essential tool ensures you never miss a shot.",
-    sizes: ["Standard", "Pro Kit"],
+    description: "Capture life's best moments with this premium everyday camera. Built for versatility and ease of use, it delivers stunning clarity in a retro-inspired design.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["#000000", "#C0C0C0", "#4A4A4A"], // Black, Silver, Gray
+    tags: ["photography", "gadget", "professional"],
     isOnSale: true,
     isNew: false,
     rating: 5,
@@ -25,16 +25,16 @@ export const products = [
   {
     id: 2,
     image: assets.chair1,
-    images:[
-       assets.chair1, assets.chair1
-    ],
+    images: [assets.chair1, assets.chair2],
     title: "Comfort Fit Daily Use Item",
     category: "Furniture",
     price: 149,
     priceLBP: 13261000,
     originalPriceLBP: 13261000,
-    description: "Experience the perfect balance of minimalism and comfort. This utility stool is crafted from high-quality materials to provide durable seating for any room. Its sleek profile fits perfectly in modern apartments and studios.",
-    sizes: ["Standard", "Tall"],
+    description: "Experience the perfect balance of minimalism and comfort. This utility stool is crafted from high-quality materials to provide durable seating for any room.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["#8B4513", "#D2B48C", "#FFFFFF"], // Brown, Tan, White
+    tags: ["home", "minimalist", "interior"],
     isOnSale: false,
     isNew: true,
     rating: 4,
@@ -43,17 +43,17 @@ export const products = [
   {
     id: 3,
     image: assets.chair2,
-    images:[
-       assets.chair2, assets.chair2,assets.chair2
-    ],
+    images: [assets.chair2, assets.chair1,],
     title: "Minimal Design Utility Product",
     category: "Furniture",
     price: 199,
     originalPrice: 279,
     priceLBP: 17711000,
     originalPriceLBP: 24831000,
-    description: "A masterclass in industrial design, this product combines functionality with aesthetic appeal. Its sturdy construction and neutral finish make it a versatile addition to your home or office workspace.",
-    sizes: ["One Size"],
+    description: "A masterclass in industrial design, this product combines functionality with aesthetic appeal.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["#2C3E50", "#7F8C8D"], // Midnight Blue, Grey
+    tags: ["office", "modern", "sturdy"],
     isOnSale: true,
     isNew: false,
     rating: 5,
@@ -62,16 +62,16 @@ export const products = [
   {
     id: 4,
     image: assets.dress,
-    images:[
-       assets.dress, assets.dress
-    ],
+    images: [assets.dress, assets.dress2],
     title: "Everyday Performance Gear",
     category: "Clothing",
     price: 129,
     priceLBP: 11481000,
     originalPriceLBP: 11481000,
-    description: "Designed for the active individual, this gear offers breathable fabric and a flexible fit. Perfect for workouts or casual outings, it ensures you stay comfortable while looking sharp.",
+    description: "Designed for the active individual, this gear offers breathable fabric and a flexible fit. Perfect for workouts or casual outings.",
     sizes: ["S", "M", "L", "XL"],
+    colors: ["#FF5733", "#000000", "#2E86C1"], // Orange, Black, Blue
+    tags: ["activewear", "performance", "breathable"],
     isOnSale: false,
     isNew: false,
     rating: 4,
@@ -80,17 +80,17 @@ export const products = [
   {
     id: 5,
     image: assets.shoes1,
-   images:[
-       assets.shoes1, assets.shoes1,assets.shoes1
-    ],
+    images: [assets.shoes1, assets.shoes2, assets.shoes3],
     title: "Lightweight Daily Essential",
     category: "Footwear",
     price: 89,
     originalPrice: 99,
     priceLBP: 7921000,
     originalPriceLBP: 8811000,
-    description: "Step into comfort with these lightweight daily trainers. Featuring a breathable mesh upper and responsive cushioning, they are designed to keep you moving effortlessly throughout your day.",
-    sizes: ["US 7", "US 8", "US 9", "US 10", "US 11"],
+    description: "Step into comfort with these lightweight daily trainers. Featuring a breathable mesh upper and responsive cushioning.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["#FFFFFF", "#E74C3C", "#333333"], // White, Red, Dark Grey
+    tags: ["running", "sneakers", "lightweight"],
     isOnSale: true,
     isNew: true,
     rating: 4,
@@ -99,16 +99,16 @@ export const products = [
   {
     id: 6,
     image: assets.headphone1,
-     images:[
-       assets.headphone1, assets.headphone1
-    ],
+    images: [assets.headphone1, assets.headphone2],
     title: "Modern Lifestyle Accessory",
     category: "Accessories",
     price: 179,
     priceLBP: 15931000,
     originalPriceLBP: 15931000,
-    description: "Elevate your style with this modern accessory. Featuring a minimalist dial and a premium strap, this watch is the perfect finishing touch to both formal and casual ensembles.",
-    sizes: ["40mm", "44mm"],
+    description: "Elevate your style with this modern accessory. Featuring a minimalist dial and a premium strap.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["#D4AF37", "#000000"], // Gold, Black
+    tags: ["luxury", "fashion", "tech"],
     isOnSale: false,
     isNew: true,
     rating: 5,
@@ -116,18 +116,18 @@ export const products = [
   },
   {
     id: 7,
-    image: assets.dress,
-     images:[
-       assets.dress, assets.dress,assets.dress
-    ],
+    image: assets.dress2,
+    images: [assets.dress2, assets.dress3, assets.dress],
     title: "Durable Everyday Companion",
     category: "Clothing",
     price: 219,
     originalPrice: 299,
     priceLBP: 19491000,
     originalPriceLBP: 26611000,
-    description: "Rugged yet refined, this shirt is built to last. Made from premium cotton, it offers a relaxed fit that doesn't compromise on style. Ideal for layering or wearing on its own.",
+    description: "Rugged yet refined, this shirt is built to last. Made from premium cotton, it offers a relaxed fit.",
     sizes: ["S", "M", "L", "XL"],
+    colors: ["#1D8348", "#FBFCFC"], // Green, White
+    tags: ["casual", "cotton", "durable"],
     isOnSale: true,
     isNew: false,
     rating: 4,
@@ -136,16 +136,16 @@ export const products = [
   {
     id: 8,
     image: assets.headphone2,
-    images:[
-       assets.headphone2, assets.headphone2,assets.headphone2
-    ],
+    images: [assets.headphone2, assets.headphone1, assets.headphone2],
     title: "High-Quality Daily Essential",
     category: "Electronics",
     price: 99,
     priceLBP: 8811000,
     originalPriceLBP: 8811000,
-    description: "Immerse yourself in high-fidelity sound. these headphones offer superior noise isolation and deep bass, making them the perfect companion for your daily commute or focused work sessions.",
-    sizes: ["One Size"],
+    description: "Immerse yourself in high-fidelity sound with superior noise isolation and deep bass.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["#000000", "#9B59B6"], // Black, Purple
+    tags: ["audio", "music", "wireless"],
     isOnSale: false,
     isNew: false,
     rating: 4,
@@ -154,17 +154,17 @@ export const products = [
   {
     id: 9,
     image: assets.watch2,
-     images:[
-       assets.watch2, assets.watch2
-    ],
+    images: [assets.watch2, assets.watch1],
     title: "Compact Performance Product",
     category: "Electronics",
     price: 159,
     originalPrice: 199,
     priceLBP: 14151000,
     originalPriceLBP: 17711000,
-    description: "Sleek, powerful, and portable. This compact device packs a punch with its high-speed performance and stunning display. Designed for those who value efficiency and design.",
-    sizes: ["Standard"],
+    description: "Sleek, powerful, and portable. This compact device packs a punch with high-speed performance.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["#5D6D7E", "#212F3D"], // Slate, Charcoal
+    tags: ["productivity", "compact", "tech"],
     isOnSale: true,
     isNew: false,
     rating: 5,
@@ -173,16 +173,16 @@ export const products = [
   {
     id: 10,
     image: assets.chair2,
-     images:[
-       assets.chair2, assets.chair2
-    ],
+    images: [assets.chair2, assets.chair1],
     title: "Essential Utility Upgrade",
     category: "Furniture",
     price: 249,
     priceLBP: 22161000,
     originalPriceLBP: 22161000,
-    description: "Upgrade your living space with this essential utility piece. Its clean lines and functional design make it a standout item that blends seamlessly with any decor style.",
-    sizes: ["Standard"],
+    description: "Upgrade your living space with this essential utility piece. Clean lines and functional design.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["#F4F6F7", "#B2BABB"], // Light Grey, Silver
+    tags: ["decor", "upgrade", "living-room"],
     isOnSale: false,
     isNew: true,
     rating: 5,
@@ -191,17 +191,17 @@ export const products = [
   {
     id: 11,
     image: assets.shoes3,
-     images:[
-       assets.shoes3, assets.shoes3
-    ],
+    images: [assets.shoes2, assets.shoes3,assets.shoes1],
     title: "Reliable Everyday Solution",
     category: "Footwear",
     price: 119,
     originalPrice: 159,
     priceLBP: 10591000,
     originalPriceLBP: 14151000,
-    description: "Reliability meets style. These sneakers are crafted for all-day wear, featuring a durable sole and a comfortable, supportive fit. A perfect choice for the modern urban explorer.",
-    sizes: ["US 8", "US 9", "US 10", "US 11"],
+    description: "Reliability meets style. These sneakers are crafted for all-day wear with a durable sole.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["#F39C12", "#34495E"], // Mustard, Navy
+    tags: ["lifestyle", "comfort", "shoes"],
     isOnSale: true,
     isNew: false,
     rating: 4,
@@ -210,21 +210,19 @@ export const products = [
   {
     id: 12,
     image: assets.tv,
-     images:[
-       assets.tv, assets.tv,assets.tv
-    ],
+    images: [assets.tv, assets.tv],
     title: "Premium Multi-Purpose Item",
     category: "Electronics",
     price: 329,
     priceLBP: 29281000,
     originalPriceLBP: 29281000,
-    description: "The ultimate multi-purpose tool for creators. High resolution, durable build, and intuitive controls make this a must-have for anyone serious about their craft.",
-    sizes: ["Standard"],
+    description: "The ultimate multi-purpose tool for creators. High resolution and durable build.",
+    sizes: ["S", "M", "L", "XL"],
+    colors: ["#000000"], // Black
+    tags: ["display", "entertainment", "smart"],
     isOnSale: false,
     isNew: false,
     rating: 5,
     categories: ["bestseller", "trending"],
   },
 ];
-
-

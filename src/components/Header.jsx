@@ -9,6 +9,7 @@ import {
 import {  GoHeart, GoInbox } from "react-icons/go";
 import { AppContext } from "../context/AppContext";
 import Search from "./Search";
+import assets from "../assets/assets";
 
 export const navConfig = [
   { label: "Home", to: "/" },
@@ -244,8 +245,9 @@ export default function Header() {
       <div className="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         {!shouldHideLogo && (
-          <Link to="/" className="text-2xl font-black uppercase">
-            Brand.
+          <Link to="/" className="text-2xl font-black uppercase flex items-center gap-2">
+            <img src={assets.logo} className="w-full max-w-[150px]" alt="" />
+            <p>Brand.</p>
           </Link>
         )}
 
@@ -292,6 +294,7 @@ export default function Header() {
         <div className="flex items-center gap-5 grow lg:grow-0">
           {/* Search */}
           <Search searchOpen={searchOpen} setSearchOpen={setSearchOpen}/>
+ {!shouldHideLogo && (
 
    <div  onClick={toggleWishlist} className="relative text-xl cursor-pointer shrink-0">
               <GoHeart  />
@@ -302,6 +305,7 @@ export default function Header() {
               </span>
         )}
             </div>
+ )}
           
 
           {!shouldHideLogo && (
