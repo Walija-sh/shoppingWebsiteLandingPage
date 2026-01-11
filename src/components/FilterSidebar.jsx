@@ -18,11 +18,11 @@ const FilterSidebar = ({
   getUniqueTags    }=useContext(AppContext);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [isTagsOpen, setIsTagsOpen] = useState(false);
+ 
 
   const categoryDropdownRef = useRef(null);
   const sortDropdownRef = useRef(null);
-  const tagsDropdownRef = useRef(null);
+  
 
   const MIN_PRICE = 0;
   const MAX_PRICE = 2000;
@@ -31,7 +31,7 @@ const FilterSidebar = ({
     const handleClickOutside = (e) => {
       if (categoryDropdownRef.current && !categoryDropdownRef.current.contains(e.target)) setIsCategoryOpen(false);
       if (sortDropdownRef.current && !sortDropdownRef.current.contains(e.target)) setIsSortOpen(false);
-      if (tagsDropdownRef.current && !tagsDropdownRef.current.contains(e.target)) setIsTagsOpen(false);
+      
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -70,11 +70,19 @@ const FilterSidebar = ({
     onDraftChange('colors', newColors);
   };
 
+  const toggleTag = (tag) => {
+  const currentTags = draftValues.tags || [];
+  const newTags = currentTags.includes(tag)
+    ? currentTags.filter(t => t !== tag)
+    : [...currentTags, tag];
+  onDraftChange('tags', newTags);
+};
+
   const handleApply = () => {
     onApply();
     setIsCategoryOpen(false);
     setIsSortOpen(false);
-    setIsTagsOpen(false);
+    
   };
 const handleClearFilters = () => {
     
@@ -175,25 +183,29 @@ const handleClearFilters = () => {
         </div>
 
         {/* Tags Dropdown */}
-        <div className="mb-8 relative" ref={tagsDropdownRef}>
-          <label className="block text-sm mb-2 font-bold capitalize tracking-wider text-gray-900">Tags</label>
-          <div onClick={() => setIsTagsOpen(!isTagsOpen)} className="w-full bg-white border cursor-pointer border-gray-300 px-4 py-3 rounded-xl flex justify-between items-center">
-            <span className="truncate">
-              {draftValues.tag ? `#${draftValues.tag}` : "Select Tag"}
-            </span>
-            <HiChevronDown className={`transition-transform ${isTagsOpen ? 'rotate-180' : ''}`} />
-          </div>
-          {isTagsOpen && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-xl shadow-lg z-50 max-h-48 overflow-y-auto">
-              <div onClick={() => { onDraftChange('tag', ''); setIsTagsOpen(false); }} className="px-4 py-3 hover:bg-gray-100 cursor-pointer text-gray-500 italic">Clear Tag</div>
-              {getUniqueTags.map((tag) => (
-                <div key={tag} onClick={() => { onDraftChange('tag', tag); setIsTagsOpen(false); }} className="px-4 py-3 hover:bg-gray-100 flex justify-between cursor-pointer">
-                  #{tag} {draftValues.tag === tag && <HiCheck />}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        <div className="mb-8">
+  <label className="text-sm font-bold capitalize tracking-wider text-gray-900 mb-4 block">
+    Tags
+  </label>
+  <div className="flex flex-wrap gap-2">
+    {getUniqueTags.map((tag) => {
+      const isSelected = draftValues.tags?.includes(tag);
+      return (
+        <button
+          key={tag}
+          onClick={() => toggleTag(tag)}
+          className={`px-3 py-1 rounded-full text-sm font-medium transition-all border cursor-pointer
+            ${isSelected 
+              ? 'bg-black text-white border-black shadow-md' 
+              : 'bg-white text-gray-600 border-gray-200 hover:border-gray-400'
+            }`}
+        >
+          #{tag}
+        </button>
+      );
+    })}
+  </div>
+</div>
 
         {/* Sort By */}
         <div className="mb-8 relative" ref={sortDropdownRef}>

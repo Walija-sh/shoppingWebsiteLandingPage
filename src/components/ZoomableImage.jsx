@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiZoomIn, FiZoomOut } from "react-icons/fi";
 
 const ZoomableImage = ({ src, alt }) => {
   const [isZoomed, setIsZoomed] = useState(false);
   const [position, setPosition] = useState({ x: 50, y: 50 });
   const [touchStart, setTouchStart] = useState(null);
+  const imgRef = useRef(null);
+
 
 
   // Desktop cursor-based zoom
@@ -23,34 +25,52 @@ const ZoomableImage = ({ src, alt }) => {
     setIsZoomed((z) => !z);
   };
 //   mobile touch actions
-const handleTouchStart = (e) => {
-  if (!isZoomed) return;
+useEffect(() => {
+  const img = imgRef.current;
+  if (!img) return;
 
-  const touch = e.touches[0];
-  setTouchStart({
-    x: touch.clientX,
-    y: touch.clientY,
-    posX: position.x,
-    posY: position.y,
-  });
-};
+  const onStart = (e) => {
+    if (!isZoomed) return;
+    e.preventDefault();
 
-const handleTouchMove = (e) => {
-  if (!isZoomed || !touchStart) return;
+    const touch = e.touches[0];
+    setTouchStart({
+      x: touch.clientX,
+      y: touch.clientY,
+      posX: position.x,
+      posY: position.y,
+    });
+  };
 
-  const touch = e.touches[0];
-  const deltaX = touch.clientX - touchStart.x;
-  const deltaY = touch.clientY - touchStart.y;
+  const onMove = (e) => {
+    if (!isZoomed || !touchStart) return;
+    e.preventDefault();
 
-  setPosition({
-    x: Math.min(100, Math.max(0, touchStart.posX - deltaX * 0.15)),
-    y: Math.min(100, Math.max(0, touchStart.posY - deltaY * 0.15)),
-  });
-};
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - touchStart.x;
+    const deltaY = touch.clientY - touchStart.y;
 
-const handleTouchEnd = () => {
-  setTouchStart(null);
-};
+    setPosition({
+      x: Math.min(100, Math.max(0, touchStart.posX - deltaX * 0.15)),
+      y: Math.min(100, Math.max(0, touchStart.posY - deltaY * 0.15)),
+    });
+  };
+
+  const onEnd = () => {
+    setTouchStart(null);
+  };
+
+  img.addEventListener("touchstart", onStart, { passive: false });
+  img.addEventListener("touchmove", onMove, { passive: false });
+  img.addEventListener("touchend", onEnd);
+
+  return () => {
+    img.removeEventListener("touchstart", onStart);
+    img.removeEventListener("touchmove", onMove);
+    img.removeEventListener("touchend", onEnd);
+  };
+}, [isZoomed, touchStart]);
+
 
 
   return (
@@ -75,17 +95,17 @@ const handleTouchEnd = () => {
       </div>
 
       {/* Mobile */}
-      <div className="md:hidden w-full h-full">
+      <div className="md:hidden w-full h-full touch-none overscroll-contain">
        <img
   src={src}
   alt={alt}
-  onTouchStart={handleTouchStart}
-  onTouchMove={handleTouchMove}
-  onTouchEnd={handleTouchEnd}
+  ref={imgRef}
+  
   className="w-full h-full object-cover transition-transform duration-300"
   style={{
     transform: isZoomed ? "scale(2)" : "scale(1)",
     transformOrigin: `${position.x}% ${position.y}%`,
+    touchAction:'none'
   }}
 />
 

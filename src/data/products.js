@@ -16,7 +16,7 @@ export const products = [
     description: "Capture life's best moments with this premium everyday camera. Built for versatility and ease of use, it delivers stunning clarity in a retro-inspired design.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#000000", "#C0C0C0", "#333333"], // Black, Silver, Gray
-    tags: ["photography", "gadget", "professional"],
+    tags: ["tech", "essential", "premium"],
     isOnSale: true,
     isNew: false,
     rating: 5,
@@ -34,7 +34,7 @@ export const products = [
     description: "Experience the perfect balance of minimalism and comfort. This utility stool is crafted from high-quality materials to provide durable seating for any room.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#8B4513", "#FFFFFF"], // Brown, White
-    tags: ["home", "minimalist", "interior"],
+    tags: ["home", "minimalist", "lifestyle"],
     isOnSale: false,
     isNew: true,
     rating: 4,
@@ -53,7 +53,7 @@ export const products = [
     description: "A masterclass in industrial design, this product combines functionality with aesthetic appeal.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#2C3E50", "#333333"], // Midnight Blue, Grey
-    tags: ["office", "modern", "sturdy"],
+    tags: ["home", "modern", "minimalist"],
     isOnSale: true,
     isNew: false,
     rating: 5,
@@ -71,7 +71,7 @@ export const products = [
     description: "Designed for the active individual, this gear offers breathable fabric and a flexible fit. Perfect for workouts or casual outings.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#000000", "#9B59B6"],
-    tags: ["activewear", "performance", "breathable"],
+    tags: ["lifestyle", "active", "essential"],
     isOnSale: false,
     isNew: false,
     rating: 4,
@@ -90,7 +90,7 @@ export const products = [
     description: "Step into comfort with these lightweight daily trainers. Featuring a breathable mesh upper and responsive cushioning.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#FFFFFF", "#E74C3C", "#333333"], // White, Red, Dark Grey
-    tags: ["running", "sneakers", "lightweight"],
+    tags: ["lifestyle", "active", "modern"],
     isOnSale: true,
     isNew: true,
     rating: 4,
@@ -108,7 +108,7 @@ export const products = [
     description: "Elevate your style with this modern accessory. Featuring a minimalist dial and a premium strap.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#D4AF37", "#000000"], // Gold, Black
-    tags: ["luxury", "fashion", "tech"],
+    tags: ["tech", "premium", "modern"],
     isOnSale: false,
     isNew: true,
     rating: 5,
@@ -127,7 +127,7 @@ export const products = [
     description: "Rugged yet refined, this shirt is built to last. Made from premium cotton, it offers a relaxed fit.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#000000", "#FFFFFF"], // Black, White
-    tags: ["casual", "cotton", "durable"],
+    tags: ["essential", "lifestyle", "premium"],
     isOnSale: true,
     isNew: false,
     rating: 4,
@@ -145,7 +145,7 @@ export const products = [
     description: "Immerse yourself in high-fidelity sound with superior noise isolation and deep bass.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#000000", "#9B59B6"], // Black, Purple
-    tags: ["audio", "music", "wireless"],
+    tags: ["tech", "essential", "lifestyle"],
     isOnSale: false,
     isNew: false,
     rating: 4,
@@ -164,7 +164,7 @@ export const products = [
     description: "Sleek, powerful, and portable. This compact device packs a punch with high-speed performance.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#F39C12", "#34495E"], 
-    tags: ["productivity", "compact", "tech"],
+    tags: ["tech", "modern", "essential"],
     isOnSale: true,
     isNew: false,
     rating: 5,
@@ -182,7 +182,7 @@ export const products = [
     description: "Upgrade your living space with this essential utility piece. Clean lines and functional design.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#F39C12", "#34495E"],
-    tags: ["decor", "upgrade", "living-room"],
+    tags: ["home", "modern", "lifestyle"],
     isOnSale: false,
     isNew: true,
     rating: 5,
@@ -201,7 +201,7 @@ export const products = [
     description: "Reliability meets style. These sneakers are crafted for all-day wear with a durable sole.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#F39C12", "#34495E"], // Mustard, Navy
-    tags: ["lifestyle", "comfort", "shoes"],
+    tags: ["lifestyle", "essential", "modern"],
     isOnSale: true,
     isNew: false,
     rating: 4,
@@ -219,7 +219,7 @@ export const products = [
     description: "The ultimate multi-purpose tool for creators. High resolution and durable build.",
     sizes: ["S", "M", "L", "XL"],
     colors: ["#000000"], // Black
-    tags: ["display", "entertainment", "smart"],
+    tags: ["tech", "premium", "modern"],
     isOnSale: false,
     isNew: false,
     rating: 5,

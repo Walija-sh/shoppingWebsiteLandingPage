@@ -15,22 +15,12 @@ const defaultFilters = {
   maxPrice: MAX_PRICE,
   sizes: [],
   colors: [],
-  tag: "",
+  tags: [],
   sort: "default"
 };
-  const [filters, setFilters] = useState({
-    category: "all",
-    minPrice: "",
-    maxPrice: "",
-    sort: "default"
-  });
+  const [filters, setFilters] = useState(defaultFilters);
 
-  const [draftFilters, setDraftFilters] = useState({
-    category: "all",
-    minPrice: "",
-    maxPrice: "",
-    sort: "default"
-  });
+  const [draftFilters, setDraftFilters] = useState(defaultFilters);
 
   const [showFilters, setShowFilters] = useState(false);
   const [layout, setLayout] = useState("grid");
@@ -87,27 +77,34 @@ const defaultFilters = {
   }
 
   // 2. Price Range
-  if (filters.minPrice) result = result.filter((p) => p.price >= Number(filters.minPrice));
-  if (filters.maxPrice) result = result.filter((p) => p.price <= Number(filters.maxPrice));
+  if (filters.minPrice !== MIN_PRICE) {
+  result = result.filter(p => p.price >= filters.minPrice);
+}
 
-  // 3. Sizes (Check if product has ANY of the selected sizes)
+if (filters.maxPrice !== MAX_PRICE) {
+  result = result.filter(p => p.price <= filters.maxPrice);
+}
+
+  // 3. Sizes
   if (filters.sizes && filters.sizes.length > 0) {
     result = result.filter((p) => 
       p.sizes.some(size => filters.sizes.includes(size))
     );
   }
 
-  // 4. Colors (Check if product has ANY of the selected colors)
+  // 4. Colors 
   if (filters.colors && filters.colors.length > 0) {
     result = result.filter((p) => 
       p.colors.some(color => filters.colors.includes(color))
     );
   }
 
-  // 5. Tags (Check if product contains the specific selected tag)
-  if (filters.tag) {
-    result = result.filter((p) => p.tags.includes(filters.tag));
-  }
+  // 5. Tags 
+if (filters.tags && filters.tags.length > 0) {
+  result = result.filter((p) => 
+    p.tags.some(tag => filters.tags.includes(tag))
+  );
+}
 
   // 6. Sorting
   if (filters.sort === "price-low") result.sort((a, b) => a.price - b.price);
