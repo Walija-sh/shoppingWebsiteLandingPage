@@ -4,6 +4,7 @@ import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import CartModal from "../components/CartModal.jsx";
 import WishlistModal from "../components/WishlistModal.jsx";
+import AboutSection from "../components/About.jsx";
 
 const Layout = () => {
   return (
@@ -13,6 +14,7 @@ const Layout = () => {
       <Outlet />
       <CartModal/>
       <WishlistModal/>
+
 
       <Footer />
 
