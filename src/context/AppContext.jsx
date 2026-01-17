@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { products as initialProducts } from "../data/products.js";
+import { setCookie,getCookie } from "../utils/cookie.js";
 
 export const AppContext = createContext();
 
@@ -10,9 +11,13 @@ const AppProvider = ({ children }) => {
   /* ===================== CART ===================== */
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCartLoaded, setIsCartLoaded] = useState(false);
+
   /* ===================== WISHLIST ===================== */
    const [wishlist, setWishlist] = useState([]);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+  const [isWishlistLoaded, setIsWishlistLoaded] = useState(false);
+
 
   /* ===================== PRODUCT SELECTORS ===================== */
   const getDealProducts = () =>
@@ -128,6 +133,33 @@ const getUniqueSizes = [...new Set(products.flatMap(p => p.sizes))].sort();
 const getUniqueColors = [...new Set(products.flatMap(p => p.colors))]; 
 
 const getUniqueTags = [...new Set(products.flatMap(p => p.tags))].sort(); 
+
+// cookies setting
+useEffect(() => {
+  const savedCart = getCookie("cart");
+  if (savedCart) {
+    setCart(savedCart);
+  }
+  setIsCartLoaded(true);
+}, []);
+
+useEffect(() => {
+  if (!isCartLoaded) return;
+  setCookie("cart", cart);
+}, [cart, isCartLoaded]);
+
+useEffect(() => {
+  const savedWishlist = getCookie("wishlist");
+  if (savedWishlist) {
+    setWishlist(savedWishlist);
+  }
+  setIsWishlistLoaded(true);
+}, []);
+useEffect(() => {
+  if(!isWishlistLoaded) return
+  setCookie("wishlist", wishlist);
+}, [wishlist,isWishlistLoaded]);
+
   /* ===================== CONTEXT VALUE ===================== */
   const value = {
     // products
