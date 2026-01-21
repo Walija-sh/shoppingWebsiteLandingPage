@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { AppContext } from "../context/AppContext";
 import ProductDetailView from "../components/ProductDetailView";
 import SimilarProducts from "../components/SimilarProducts";
@@ -31,9 +32,14 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div className="container mx-auto py-20 text-center font-bold text-gray-400">
+      <motion.div 
+        className="container mx-auto py-20 text-center font-bold text-gray-400"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         Product not found
-      </div>
+      </motion.div>
     );
   }
 

@@ -11,9 +11,9 @@ const Home = () => {
       <Hero />
       <ProductGrid />
       <BannerGroupOne />
-      <AboutSection/>
       <DealOfWeek />
       <BannerGroupTwo />
+      <AboutSection />
     </>
   );
 };

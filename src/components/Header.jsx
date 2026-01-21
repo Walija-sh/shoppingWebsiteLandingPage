@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useContext } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   HiChevronDown,
@@ -6,7 +7,7 @@ import {
   HiBars3,
   HiXMark,
 } from "react-icons/hi2";
-import {  GoHeart, GoInbox } from "react-icons/go";
+import { GoHeart, GoInbox } from "react-icons/go";
 import { AppContext } from "../context/AppContext";
 import Search from "./Search";
 import assets from "../assets/assets";
@@ -89,19 +90,17 @@ export default function Header() {
   const [mobileOpenItem, setMobileOpenItem] = useState(null);
   const [mobileNestedOpen, setMobileNestedOpen] = useState(null);
   const [searchOpen, setSearchOpen] = useState(false);
-    const {getCartCount,toggleCart,toggleWishlist,getWishlistCount}=useContext(AppContext);
-    const cartCount = getCartCount();
-    const wishlistCount=getWishlistCount();
+  const { getCartCount, toggleCart, toggleWishlist, getWishlistCount } = useContext(AppContext);
+  const cartCount = getCartCount();
+  const wishlistCount = getWishlistCount();
 
-  
   const [breakpoints, setBreakpoints] = useState({
     isSmallScreen: typeof window !== 'undefined' ? window.innerWidth < 640 : false,
     isMobileScreen: typeof window !== 'undefined' ? window.innerWidth < 1024 : false,
   });
-  
+
   const headerRef = useRef(null);
 
-  // Single resize handler
   const handleResize = useCallback(() => {
     setBreakpoints({
       isSmallScreen: window.innerWidth < 640,
@@ -109,14 +108,12 @@ export default function Header() {
     });
   }, []);
 
-  // Single resize effect
   useEffect(() => {
-    handleResize(); // Set initial values
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [handleResize]);
 
-  // Click outside handler
   useEffect(() => {
     const handler = (e) => {
       if (headerRef.current && !headerRef.current.contains(e.target)) {
@@ -129,28 +126,31 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // Body overflow handler
   useEffect(() => {
     if (mobileMenuOpen && breakpoints.isMobileScreen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
-
     return () => {
       document.body.style.overflow = "";
     };
   }, [mobileMenuOpen, breakpoints.isMobileScreen]);
 
-  // Memoized render helper
   const renderNestedItems = (items, isMobile = false) => {
     return items.map((item) => {
       if (item.nested) {
         const key = `${item.label}-${item.nested.length}`;
         const isOpen = isMobile ? mobileNestedOpen === key : openNested === key;
-        
+
         return (
-          <li key={key} className="cursor-pointer">
+          <motion.li 
+            key={key} 
+            className="cursor-pointer"
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <button
               onClick={() => {
                 if (isMobile) {
@@ -162,32 +162,53 @@ export default function Header() {
               className="w-full flex cursor-pointer justify-between text-sm font-medium"
             >
               {item.label}
-              <HiChevronDown
-                className={`transition ${isOpen ? "rotate-180" : ""}`}
-              />
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <HiChevronDown />
+              </motion.div>
             </button>
 
-            {isOpen && (
-              <ul className={`${isMobile ? 'ml-4 mt-2 border-l border-[#eee] pl-4 space-y-1' : 'ml-4 mt-2 border-l border-[#eee] pl-4 space-y-1'}`}>
-                {item.nested.map((nestedItem) => (
-                  <li key={nestedItem.label}>
-                    <Link
-                      to={nestedItem.to}
-                      className={`block ${isMobile ? 'text-sm py-1' : 'text-sm text-[#555]'}`}
-                      onClick={() => isMobile && setMobileMenuOpen(false)}
+            <AnimatePresence>
+              {isOpen && (
+                <motion.ul
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className={`${isMobile ? 'ml-4 mt-2 border-l border-[#eee] pl-4 space-y-1' : 'ml-4 mt-2 border-l border-[#eee] pl-4 space-y-1'}`}
+                >
+                  {item.nested.map((nestedItem, idx) => (
+                    <motion.li
+                      key={nestedItem.label}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: idx * 0.05 }}
                     >
-                      {nestedItem.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
+                      <Link
+                        to={nestedItem.to}
+                        className={`block ${isMobile ? 'text-sm py-1' : 'text-sm text-[#555]'}`}
+                        onClick={() => isMobile && setMobileMenuOpen(false)}
+                      >
+                        {nestedItem.label}
+                      </Link>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </motion.li>
         );
       }
 
       return (
-        <li key={item.label}>
+        <motion.li
+          key={item.label}
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <Link
             to={item.to}
             className={`${isMobile ? 'block ml-3 text-sm py-1' : 'text-sm text-[#555]'}`}
@@ -195,15 +216,19 @@ export default function Header() {
           >
             {item.label}
           </Link>
-        </li>
+        </motion.li>
       );
     });
   };
 
-  // mega menu content
   const renderMegaMenu = (megaConfig, isMobile = false) => {
-    return megaConfig.map((group) => (
-      <div key={group.title}>
+    return megaConfig.map((group, groupIdx) => (
+      <motion.div
+        key={group.title}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: groupIdx * 0.1 }}
+      >
         {!isMobile && (
           <p className="text-[11px] uppercase tracking-[0.2em] text-[#999] mb-4">
             {group.title}
@@ -230,7 +255,7 @@ export default function Header() {
             </li>
           ))}
         </ul>
-      </div>
+      </motion.div>
     ));
   };
 
@@ -244,133 +269,232 @@ export default function Header() {
     >
       <div className="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        {!shouldHideLogo && (
-          <Link to="/" className="text-2xl font-black uppercase flex items-center gap-2">
-            <img src={assets.logo} className="w-full max-w-[150px]" alt="" />
-            <p>Brand.</p>
-          </Link>
-        )}
+        <AnimatePresence>
+          {!shouldHideLogo && (
+            <motion.div
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Link to="/" className="text-2xl font-black uppercase flex items-center gap-2">
+                <img src={assets.logo} className="w-full max-w-[150px]" alt="" />
+                <p>Brand.</p>
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-10">
-          {navConfig.map((item) => {
+          {navConfig.map((item, idx) => {
             if (!item.mega) {
               return (
-                <Link
+                <motion.div
                   key={item.label}
-                  to={item.to}
-                  className="text-[13px] font-bold uppercase tracking-widest"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: idx * 0.05 }}
                 >
-                  {item.label}
-                </Link>
+                  <Link
+                    to={item.to}
+                    className="text-[13px] font-bold uppercase tracking-widest"
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               );
             }
 
             const isOpen = activeMenu === item.label;
 
             return (
-              <div key={item.label} className="">
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: idx * 0.05 }}
+              >
                 <button
                   onClick={() => setActiveMenu(isOpen ? null : item.label)}
                   className="flex cursor-pointer items-center gap-1 text-[13px] font-bold uppercase tracking-widest"
                 >
                   {item.label}
-                  <HiChevronDown
-                    className={`transition ${isOpen ? "rotate-180" : ""}`}
-                  />
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <HiChevronDown />
+                  </motion.div>
                 </button>
 
-                {isOpen && (
-                  <div className="absolute top-[50px] left-0 right-0 w-full bg-white border border-[#eee] rounded-[24px] shadow-xl p-8 grid grid-cols-2 gap-12">
-                    {renderMegaMenu(item.mega)}
-                  </div>
-                )}
-              </div>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute top-[50px] left-0 right-0 w-full bg-white border border-[#eee] rounded-[24px] shadow-xl p-8 grid grid-cols-2 gap-12"
+                    >
+                      {renderMegaMenu(item.mega)}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </nav>
 
         {/* Right side icons */}
         <div className="flex items-center gap-5 grow lg:grow-0">
-          {/* Search */}
-          <Search searchOpen={searchOpen} setSearchOpen={setSearchOpen}/>
- {!shouldHideLogo && (
+          <Search searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
 
-   <div  onClick={toggleWishlist} className="relative text-xl cursor-pointer shrink-0">
-              <GoHeart  />
-              
-              {wishlistCount > 0 && (
-         <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
-                {wishlistCount}
-              </span>
-        )}
-            </div>
- )}
-          
+          <AnimatePresence>
+            {!shouldHideLogo && (
+              <motion.div
+                initial={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+                onClick={toggleWishlist}
+                className="relative text-xl cursor-pointer shrink-0"
+              >
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <GoHeart />
+                </motion.div>
 
-          {!shouldHideLogo && (
-            <div  onClick={toggleCart} className="relative text-xl cursor-pointer">
-              <GoInbox  />
-              
-              {cartCount > 0 && (
-         <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
-                {cartCount}
-              </span>
-        )}
-            </div>
-          )}
+                <AnimatePresence>
+                  {wishlistCount > 0 && (
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      className="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center"
+                    >
+                      {wishlistCount}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-          {/* Mobile toggle */}
-          {!shouldHideLogo && (
-            <button
-              className="lg:hidden text-2xl cursor-pointer"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <HiXMark /> : <HiBars3 />}
-            </button>
-          )}
+          <AnimatePresence>
+            {!shouldHideLogo && (
+              <motion.div
+                initial={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+                onClick={toggleCart}
+                className="relative text-xl cursor-pointer"
+              >
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <GoInbox />
+                </motion.div>
+
+                <AnimatePresence>
+                  {cartCount > 0 && (
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      className="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center"
+                    >
+                      {cartCount}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {!shouldHideLogo && (
+              <motion.button
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="lg:hidden text-2xl cursor-pointer"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <HiXMark /> : <HiBars3 />}
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && isMobileScreen && (
-        <div className="lg:hidden fixed top-[60px] left-0 right-0 bottom-0 z-[1000] bg-white overflow-y-auto border-t p-6 space-y-6">
-          {navConfig.map((item) => {
-            if (!item.mega) {
+      <AnimatePresence>
+        {mobileMenuOpen && isMobileScreen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden fixed top-[60px] left-0 right-0 bottom-0 z-[1000] bg-white overflow-y-auto border-t p-6 space-y-6"
+          >
+            {navConfig.map((item, idx) => {
+              if (!item.mega) {
+                return (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: idx * 0.05 }}
+                  >
+                    <Link
+                      to={item.to}
+                      className="block text-lg font-bold"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                );
+              }
+
+              const open = mobileOpenItem === item.label;
+
               return (
-                <Link
+                <motion.div
                   key={item.label}
-                  to={item.to}
-                  className="block text-lg font-bold"
-                  onClick={() => setMobileMenuOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: idx * 0.05 }}
                 >
-                  {item.label}
-                </Link>
+                  <button
+                    onClick={() => setMobileOpenItem(open ? null : item.label)}
+                    className="flex justify-between w-full text-lg font-bold"
+                  >
+                    {item.label}
+                    <motion.div
+                      animate={{ rotate: open ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {open ? <HiChevronUp /> : <HiChevronDown />}
+                    </motion.div>
+                  </button>
+
+                  <AnimatePresence>
+                    {open && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="mt-4 ml-3 space-y-4"
+                      >
+                        {renderMegaMenu(item.mega, true)}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               );
-            }
-
-            const open = mobileOpenItem === item.label;
-
-            return (
-              <div key={item.label}>
-                <button
-                  onClick={() => setMobileOpenItem(open ? null : item.label)}
-                  className="flex justify-between w-full text-lg font-bold"
-                >
-                  {item.label}
-                  {open ? <HiChevronUp /> : <HiChevronDown />}
-                </button>
-
-                {open && (
-                  <div className="mt-4 ml-3 space-y-4">
-                    {renderMegaMenu(item.mega, true)}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )}
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

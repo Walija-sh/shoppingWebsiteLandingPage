@@ -3,6 +3,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import assets from "../assets/assets";
 
 const slides = [
@@ -15,10 +16,15 @@ const slides = [
 
 export default function Hero() {
   return (
-    <section className="px-4 py-6 md:px-8 md:py-8 bg-white  ">
+    <motion.section
+      className="px-4 py-6 md:px-8 md:py-8 bg-white"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+    >
       <div className="max-w-7xl mx-auto overflow-hidden rounded-[28px] md:rounded-[40px] shadow-xl">
         <Swiper
-          modules={[Pagination,Autoplay]}
+          modules={[Pagination, Autoplay]}
           pagination={{ clickable: true }}
           loop
           autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -26,7 +32,10 @@ export default function Hero() {
         >
           {slides.map((img, index) => (
             <SwiperSlide key={index}>
-              <Link to='/shop' className="relative block h-[260px] sm:h-[360px]  lg:h-[460px]">
+              <Link
+                to="/shop"
+                className="relative block h-[260px] sm:h-[360px] lg:h-[460px]"
+              >
                 <img
                   src={img}
                   alt={`Hero slide ${index + 1}`}
@@ -38,7 +47,6 @@ export default function Hero() {
         </Swiper>
       </div>
 
-      
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -56,6 +64,6 @@ export default function Hero() {
         `,
         }}
       />
-    </section>
+    </motion.section>
   );
 }
