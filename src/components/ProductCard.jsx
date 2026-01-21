@@ -19,7 +19,7 @@ export default function ProductCard({
 
   // Card layout classes based on list mode
   const containerClass = list
-    ? "group flex bg-white rounded-[32px] p-4 border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300 gap-4"
+    ? "group flex bg-white rounded-[32px]  p-4 border border-gray-100 shadow-sm hover:border-gray-100 hover:shadow-xl transition-all duration-300 gap-4"
     : "group bg-white rounded-[32px] p-3 border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300";
 
   const imageContainerClass = list
